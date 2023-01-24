@@ -1,12 +1,16 @@
 @import './utils/variables';
+@import './utils/visually-hidden';
 
 @import './base/common';
 @import './base/container';
 
 @import './components/modal-team';
+@import './components/modal-film';
 
-@import './layout/header';
-@import './layout/film-gallery';
+@import './layout/home-header';
+@import './layout/libr-header';
+@import './layout/home-film-gallery';
+@import './layout/libr-film-gallery';
 @import './layout/page-number';
 @import './layout/footer';
 
