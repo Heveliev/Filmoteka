@@ -1,0 +1,76 @@
+@media screen and (max-width: 677px) {
+  .header-conteiner {
+    padding-bottom: 62px;
+  }
+  .button-conteiner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .libr-button {
+    width: 130px;
+    height: 45px;
+    border: 1px solid #ffffff;
+    border-radius: 5px;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 16px;
+
+    text-transform: uppercase;
+
+    color: #ffffff;
+    background-color: transparent;
+  }
+
+  .current-page {
+    background: #ff6b02;
+    border-radius: 5px;
+    border: 1px solid #ff6b02;
+  }
+}
+
+@media screen and (min-width: 678px) {
+  .button-conteiner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 32px;
+  }
+
+  .libr-button {
+    width: 150px;
+    height: 45px;
+    border: 1px solid #ffffff;
+    border-radius: 5px;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 16px;
+
+    text-transform: uppercase;
+
+    color: #ffffff;
+    background-color: transparent;
+  }
+
+  .current-page {
+    background: #ff6b02;
+    border-radius: 5px;
+    border: 1px solid #ff6b02;
+  }
+}
+
+@media screen and(min-width:1200px) {
+  .button-conteiner {
+    gap: 16px;
+  }
+  .libr-button {
+    width: 142px;
+    height: 42px;
+  }
+}
