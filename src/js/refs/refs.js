@@ -1,9 +1,6 @@
-// const searchInput = document.querySelector(input);
+export { refs };
 
-
-
-
-
-
-
-export {};
+const refs = {
+  // searchInput: document.querySelector(input),
+  moviesList: document.querySelector('.films__list'),
+};
