@@ -1,0 +1,59 @@
+.films {
+    width: 1280px;
+    margin: 0 auto;
+
+}
+
+.films__container {
+    padding: 60px 31px;
+    margin: 0px;
+    margin: 0 auto;
+}
+
+.films__list {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.films__card {
+    width: 395px;
+    margin-bottom: 12px;
+}
+
+.films__link {
+    width: 395px;
+}
+
+.films__picture {
+    width: 395px;
+    margin-bottom: 12px;
+}
+
+.films__title {
+    font-size: 20px;
+    line-height: 1.2;
+    color: black;
+    text-transform: capitalize;
+}
+
+.films__details {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+}
+
+.film-font-style {
+    font-size: 20px;
+    line-height: 1.2;
+    color: #FF6B01;
+}
+
+.films__rate {
+    background-color: #FF6B01;
+    padding: 1px 7px;
+    font-size: 12px;
+    line-height: 1.17;
+    color: #FFFFFF;
+    border-radius: 5px;
+}
