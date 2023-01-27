@@ -1,3 +1,4 @@
+import {fetchMoviesGenres} from '../getapi/fetchTrendingMoviesInfo';
 export async function setMoviesGenres() {
     const response = await fetchMoviesGenres();
   
