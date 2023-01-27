@@ -5,17 +5,30 @@
 // https://api.themoviedb.org/3/movie/550?api_key=c939ec4794622751dcf7fba01c4a07e9
 
 const axios = require('axios').default;
+const API_KEY = 'c939ec4794622751dcf7fba01c4a07e9';
 
-async function GETAPI (val = ''){
+// async function GETAPI (val = ''){
+//     try {
+//         const axiosGet = await axios.get(`https://api.themoviedb.org/3/${val}?api_key=c939ec4794622751dcf7fba01c4a07e9`);
+//         return axiosGet.data;
+//     } catch (error) {
+//     throw new Error(error);
+//     }
+// };
+
+async function getData (value = "", page = 1){
     try {
-        const axiosGet = await axios.get(`https://api.themoviedb.org/3/${val}?api_key=c939ec4794622751dcf7fba01c4a07e9`);
+        const axiosGet = await axios.get(`search/movie?api_key=${API_KEY}&query=${value}&page=${page}`);
         return axiosGet.data;
     } catch (error) {
     throw new Error(error);
     }
 };
 
-export {GETAPI};
+export {getData};
+
+    
+    
 
 /**Пример по использованию */
 // import { GETAPI } from "./js/GETAPI/GETAPI";
