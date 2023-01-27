@@ -1,5 +1,4 @@
 import {
-  fetchMoviesGenres,
   fetchTrendingMoviesInfo,
 } from '../GETAPI/fetchTrendingMoviesInfo';
 import { renderMovieDetalis } from './renderMovieDetails';

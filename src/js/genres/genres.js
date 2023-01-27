@@ -1,5 +1,5 @@
 import {fetchMoviesGenres} from '../getapi/fetchTrendingMoviesInfo';
-console.log(fetchMoviesGenres());
+
 let genres = {};
 const GENRES_KEY = 'saved-genres';
 async function setMoviesGenres() {
