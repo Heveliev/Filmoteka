@@ -1,9 +1,10 @@
 import {
+  fetchMoviesGenres,
   fetchTrendingMoviesInfo,
 } from '../GETAPI/fetchTrendingMoviesInfo';
 import { renderMovieDetalis } from './renderMovieDetails';
 import { refs } from '../refs/refs';
-import { setMoviesGenres,} from '../genres/genres';
+
 
 const GENRES_KEY = 'saved-genres';
 const MOVIES_KEY = 'saved-movies';
@@ -47,6 +48,15 @@ async function renderTrendingPage() {
 }
 
 // function ganres
-setMoviesGenres();
+async function setMoviesGenres() {
+  const response = await fetchMoviesGenres();
+
+  for (const genre of response.genres) {
+    const { id, name } = genre;
+    genres[id] = name;
+  }
+
+  localStorage.setItem(GENRES_KEY, JSON.stringify(genres));
+};
 
 renderTrendingPage();
