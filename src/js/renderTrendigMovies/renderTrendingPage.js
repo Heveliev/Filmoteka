@@ -4,7 +4,7 @@ import {
 } from '../GETAPI/fetchTrendingMoviesInfo';
 import { renderMovieDetalis } from './renderMovieDetails';
 import { refs } from '../refs/refs';
-import { setMoviesGenres} from '../genres/genres';
+import { setMoviesGenres,} from '../genres/genres';
 
 const GENRES_KEY = 'saved-genres';
 const MOVIES_KEY = 'saved-movies';
