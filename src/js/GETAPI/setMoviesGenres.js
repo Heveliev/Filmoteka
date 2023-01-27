@@ -1,3 +1,5 @@
+import { fetchMoviesGenres } from './fetchTrendingMoviesInfo';
+
 export async function setMoviesGenres() {
   const GENRES_KEY = 'saved-genres';
   let genres = {};
