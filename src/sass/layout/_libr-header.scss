@@ -2,7 +2,7 @@
   .header-conteiner {
     padding-bottom: 62px;
   }
-  .button-conteiner {
+  .button-list {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -12,17 +12,16 @@
   .libr-button {
     width: 130px;
     height: 45px;
-    border: 1px solid #ffffff;
+    border: 1px solid var(--primary-background-color);
     border-radius: 5px;
-    font-family: 'Roboto';
+    cursor: pointer;
     font-style: normal;
     font-weight: 500;
-    font-size: 12px;
     line-height: 16px;
 
     text-transform: uppercase;
 
-    color: #ffffff;
+    color: var(--primary-background-color);
     background-color: transparent;
   }
 
@@ -34,7 +33,7 @@
 }
 
 @media screen and (min-width: 678px) {
-  .button-conteiner {
+  .button-list {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -44,17 +43,16 @@
   .libr-button {
     width: 150px;
     height: 45px;
-    border: 1px solid #ffffff;
+    border: 1px solid var(--primary-background-color);
     border-radius: 5px;
-    font-family: 'Roboto';
+    cursor: pointer;
     font-style: normal;
     font-weight: 500;
-    font-size: 12px;
     line-height: 16px;
 
     text-transform: uppercase;
 
-    color: #ffffff;
+    color: var(--primary-background-color);
     background-color: transparent;
   }
 

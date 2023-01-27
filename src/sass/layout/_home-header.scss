@@ -1,6 +1,6 @@
 @media screen and (max-width: 677px) {
   .header {
-    background-color: gray;
+    background-color: var(--footer-info);
     background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
       url(../images/mobile/home-img.jpg);
     background-size: cover;
@@ -35,10 +35,8 @@
 
   .nav-list__item {
     position: relative;
-    font-family: 'Roboto';
     font-style: normal;
     font-weight: 500;
-    font-size: 12px;
     line-height: 14px;
     text-transform: uppercase;
   }
@@ -52,11 +50,11 @@
     height: 3px;
     left: 0;
     top: 15;
-    background: #ff001b;
+    background: var(--link-underline);
   }
 
   .nav-list__item--link {
-    color: #ffffff;
+    color: var(--primary-background-color);
   }
 
   .header-form {
@@ -70,13 +68,14 @@
     width: 260px;
     height: 20px;
     border: none;
-    border-bottom: 0.5px solid #ffffff;
+    outline: none;
+    border-bottom: 0.5px solid var(--primary-background-color);
     background-color: transparent;
-    color: #ffffff;
+    color: var(--primary-background-color);
   }
 
   .header-form__input::placeholder {
-    color: #ffffff;
+    color: var(--primary-background-color);
   }
 
   .header-form__button {
@@ -85,7 +84,7 @@
     height: 20px;
     background-color: transparent;
     border: none;
-    border-bottom: 0.5px solid #ffffff;
+    border-bottom: 0.5px solid var(--primary-background-color);
   }
 }
 
@@ -93,7 +92,7 @@
   screen and (max-width: 767px) and (min-resolution: 192dpi),
   screen and (max-width: 767px) and (min-resolution: 2dppx) {
   .header {
-    background-color: gray;
+    background-color: var(--footer-info);
     background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
       url(../images/mobile/home-img@2x.jpg);
   }
@@ -103,7 +102,7 @@
   screen and (min-width: 678px) and (min-resolution: 96dpi),
   screen and (min-width: 678px) and (min-resolution: 1dppx) {
   .header {
-    background-color: gray;
+    background-color: var(--footer-info);
     background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
       url(../images/tablet/home-img.jpg);
   }
@@ -144,7 +143,6 @@
 
   .logo-span {
     margin-left: 8px;
-    font-family: 'Roboto';
     font-style: normal;
     font-weight: 500;
     font-size: 30px;
@@ -152,7 +150,7 @@
     display: flex;
     align-items: center;
     text-align: center;
-    color: #ffffff;
+    color: var(--primary-background-color);
   }
 
   .header-nav {
@@ -166,10 +164,8 @@
 
   .nav-list__item {
     position: relative;
-    font-family: 'Roboto';
     font-style: normal;
     font-weight: 500;
-    font-size: 12px;
     line-height: 14px;
     text-transform: uppercase;
   }
@@ -183,11 +179,11 @@
     height: 3px;
     left: 0;
     top: 15;
-    background: #ff001b;
+    background: var(--link-underline);
   }
 
   .nav-list__item--link {
-    color: #ffffff;
+    color: var(--primary-background-color);
   }
 
   .header-form {
@@ -201,13 +197,14 @@
     width: 316px;
     height: 20px;
     border: none;
-    border-bottom: 0.5px solid #ffffff;
+    outline: none;
+    border-bottom: 0.5px solid var(--primary-background-color);
     background-color: transparent;
-    color: #ffffff;
+    color: var(--primary-background-color);
   }
 
   .header-form__input::placeholder {
-    color: #ffffff;
+    color: var(--primary-background-color);
   }
 
   .header-form__button {
@@ -216,7 +213,7 @@
     height: 20px;
     background-color: transparent;
     border: none;
-    border-bottom: 0.5px solid #ffffff;
+    border-bottom: 0.5px solid var(--primary-background-color);
   }
 }
 @media screen and (min-width: 1200px) and (min-device-pixel-ratio: 1),
