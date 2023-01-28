@@ -5,14 +5,13 @@ export function renderMoviesCards(moviesObjects) {
     .map(
       movie => `<li class="films__card">
         <a href="" class="films__link">
-          <img <img src="https://image.tmdb.org/t/p/w500/${
-            movie.poster_path
-          }"  alt="film poster" class="films__picture" />
+        <div class="films__overflow-wrapper"><img src="https://image.tmdb.org/t/p/w500/${movie.poster_path
+        }"  alt="film poster" class="films__picture" /></div>
           <p class="films__title">${movie.title}</p>
           <div class="films__details">
             <p class="films__genres film-font-style">${createMovieDetalisMarkup(
-              movie
-            )}</p>
+          movie
+        )}</p>
             <span class="films__rate">${movie.vote_average.toFixed(1)}</span>
           </div>
         </a>
