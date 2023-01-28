@@ -1,4 +1,4 @@
-import { getData } from "../GETAPI/getData";
+import { getData } from "../getapi/getData";
 import { createMarkup } from "./markup";
 import { refs } from "../refs/refs";
 
