@@ -11,7 +11,7 @@ function appendGalleryMarkup(markup) {
 
 async function fetchFilmsByName() {
     const { results }  = await getData('cat', 1);
-    console.log(results);
+    // console.log(results);
 
     const create = createMarkup(results);
     appendGalleryMarkup(create);

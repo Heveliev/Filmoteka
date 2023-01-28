@@ -7,5 +7,7 @@ const failureMassege = document.querySelector(".failure-massege");
 
 
 
+export { boxGallery, form, failureMassege, moviesList};
 
-export {boxGallery, form, failureMassege};
+
+
