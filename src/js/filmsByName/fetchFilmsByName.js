@@ -1,12 +1,12 @@
 import { getData } from "../GETAPI/getData";
 import { createMarkup } from "./markup";
-// import { boxGallery, form, failureMassege } from "../refs/refs";
+import { refs } from "../refs/refs";
 
-form.addEventListener('submit', onSearchByName)
+refs.form.addEventListener('submit', onSearchByName)
 
 function appendGalleryMarkup(markup) {
-    // boxGallery.insertAdjacentHTML('beforeend', markup);
-    boxGallery.innerHTML = markup;
+    // refs.boxGallery.insertAdjacentHTML('beforeend', markup);
+    refs.boxGallery.innerHTML = markup;
 }
 
 async function fetchFilmsByName() {
@@ -33,21 +33,21 @@ async function onSearchByName(e) {
     const { results } = await getData(value, page = 1);
 
     if (!results.length) {
-        // failureMassege.innerHTML = 'Search result not successful. Enter the correct movie name and search.';
+        // refs.failureMassege.innerHTML = 'Search result not successful. Enter the correct movie name and search.';
         // setTimeout(() => {
-        //     failureMassege.innerHTML = ''
+        //     refs.failureMassege.innerHTML = ''
         // }, 1000);
         console.log("error");
         return;
     }
 
-    clearnMarkup();
+    // clearnMarkup();
     const create = createMarkup(results);
     appendGalleryMarkup(create);
 }
 
 function clearnMarkup() {
-    boxGallery.innerHTML = '';
+    refs.boxGallery.innerHTML = '';
 }
 
 export {fetchFilmsByName, appendGalleryMarkup, onSearchByName, clearnMarkup};
