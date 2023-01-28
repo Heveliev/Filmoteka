@@ -2,26 +2,27 @@ const filmCard = document.querySelector(".films__list");
 const backdrop = document.querySelector(".backdrop-modal-film");
 const closeBtn = document.querySelector(".modal__close-btn");
 const filmRendering = document.querySelector(".film-render-markup");
-const modalContainer = document.querySelector(".modal__container");
+
+
 
 
 filmCard.addEventListener("click", openModalFilm);
 closeBtn.addEventListener("click", closeModalFilm);
 
 function openModalFilm(evt) {
-    backdrop.classList.remove("is-hidden");
-    const filmId = evt.target.closest("li").id;
-    const filmArray = JSON.parse(localStorage.getItem("saved-movies"));
-    const filmOpened = filmArray.find(film => film.id === Number(filmId));
+  backdrop.classList.remove("is-hidden");
+  const filmId = evt.target.closest("li").id;
+  const filmArray = JSON.parse(localStorage.getItem("saved-movies"));
+  const filmOpened = filmArray.find(film => film.id === Number(filmId));
 
-    console.log(filmOpened);
-
-    renderModalFilm(filmOpened);
-    findGenres(filmOpened.genre_ids);
+  renderModalFilm(filmOpened);
+  findGenres(filmOpened.genre_ids);
+  localStorageHandler(filmOpened);
 }
 
 function closeModalFilm() {
-    backdrop.classList.add("is-hidden");
+  backdrop.classList.add("is-hidden");
+  clearModelFilm();
 }
 
 function renderModalFilm(film) {
@@ -62,14 +63,61 @@ function renderModalFilm(film) {
             </p>
           </div>
           <div class="modal__buttons">
-            <button class="modal-btn btn-watched">ADD TO WATCHED</button>
-            <button class="modal-btn btn-queue">ADD TO QUEUE</button>
+            <button class="modal-btn btn-watched">${getWatchActionText(film)}</button>
+            <button class="modal-btn btn-queue">${getQueueActiontext(film)}</button>
           </div>
         </div>`
     )
 }
 
+function clearModelFilm() {
+  return filmRendering.innerHTML = "";
+}
+
 function findGenres(filmGenreIds) {
     const savedGenres = JSON.parse(localStorage.getItem('saved-genres'));
     return textGenres = filmGenreIds.map(genreId => savedGenres[genreId]).join(`, `);
+} 
+
+function localStorageHandler(film) {
+  const toWatchedBtn = document.querySelector(".btn-watched");
+  const queueBtn = document.querySelector(".btn-queue");
+
+  const WATCHED_KEY = "watched-films";
+  const QUEUE_KEY = "queue-films";
+
+  toWatchedBtn.addEventListener("click", addToWatched);
+  queueBtn.addEventListener("click", addToQueue);
+
+  function addToWatched() {
+    let watchedData = JSON.parse(localStorage.getItem("watched-films")) || [];
+    if (!watchedData.find(item => item.id === film.id)) {
+      watchedData.push(film);
+    } else {
+      watchedData = watchedData.filter(item => item.id !== film.id);
+    }
+    localStorage.setItem(WATCHED_KEY, JSON.stringify(watchedData));
+    toWatchedBtn.textContent = getWatchActionText(film);
+  }
+
+  function addToQueue() {
+    let queueData = JSON.parse(localStorage.getItem("queue-films")) || [];
+    if (!queueData.find(item => item.id === film.id)) {
+      queueData.push(film);
+    } else {
+      queueData = queueData.filter(item => item.id !== film.id);
+    }
+    localStorage.setItem(QUEUE_KEY, JSON.stringify(queueData));
+    queueBtn.textContent = getQueueActiontext(film);
+  }
+}
+
+function getWatchActionText(film) {
+  let watchedData = JSON.parse(localStorage.getItem("watched-films")) || [];
+  return watchedData.find(item => item.id === film.id) ? "REMOVE FROM WATCHED" : "ADD TO WATCHED";
+}
+
+function getQueueActiontext(film) {
+  let queueData = JSON.parse(localStorage.getItem("queue-films")) || [];
+  return queueData.find(item => item.id === film.id) ? "REMOVE FROM QUEUE" : "ADD TO QUEUE";
 }
