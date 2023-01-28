@@ -1,12 +1,22 @@
 .films {
-    width: 1280px;
+    // width: 1280px;
     margin: 0 auto;
 
 }
 
+.films__wripper {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+
+    /* display: block; */
+    /* padding: 60px 31px; */
+    // gap: 16px;
+}
+
 .films__container {
+    display: flex;
     padding: 60px 31px;
-    margin: 0px;
     margin: 0 auto;
 }
 
@@ -23,7 +33,26 @@
 
 .films__link {
     width: 395px;
+
 }
+
+.films__overflow-wrapper {
+    overflow: hidden;
+    margin-bottom: 12px;
+
+}
+
+img.films__picture:hover {
+    // display: block;
+    transition: transform 0.25s;
+    transform: scale(1.1);
+    // overflow: hidden;
+    // width: 395px;
+}
+
+// img.films__picture:hover {
+//     overflow: hidden;
+// }
 
 .films__picture {
     width: 395px;
@@ -39,7 +68,6 @@
 
 .films__details {
     display: flex;
-    flex-wrap: wrap;
     gap: 5px;
     align-items: center;
 }
@@ -57,4 +85,121 @@
     line-height: 1.17;
     color: #FFFFFF;
     border-radius: 5px;
+}
+
+
+.overlay {
+    position: absolute;
+    padding: 63px 24px;
+    width: 100%;
+    height: 100%;
+    left: 0px;
+    bottom: 0;
+    font-size: 18px;
+    line-height: 28px;
+    letter-spacing: 0.03em;
+    color: var(--bgcolor);
+    background-color: rgba(33, 150, 243, 0.9);
+    overflow: auto;
+    transform: translateY(100%);
+    transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+
+@media screen and (min-width: 320px) {
+    .films__container {
+        margin: 0 auto;
+        padding: 60px 20px;
+        display: flex;
+    }
+
+    .films__overflow-wrapper {
+        height: 420px;
+    }
+
+    .films__wripper {
+        // background-color: red;
+        // max-height: 454px;
+        width: 320px;
+    }
+
+    .films__picture {
+        width: 280px;
+    }
+
+    .films__link {
+        width: 280px;
+    }
+
+    .films__card {
+        width: 280px;
+    }
+
+}
+
+
+@media screen and (min-width: 768px) {
+    .films__container {
+        margin: 0 auto;
+        padding: 60px 40px;
+        display: flex;
+    }
+
+    .films__overflow-wrapper {
+        height: 504px;
+        // margin-bottom: 12px;
+    }
+
+    .films__wripper {
+        // max-height: 454px;
+        width: 768px;
+        // background-color: rgb(7, 88, 40);
+    }
+
+    .films__picture {
+        width: 336px;
+    }
+
+    .films__link {
+        width: 336px;
+    }
+
+
+
+    .films__card {
+        width: 336px;
+    }
+}
+
+@media screen and (min-width: 1280px) {
+    .films__container {
+        margin: 0 auto;
+        padding: 60px 31px;
+        display: flex;
+    }
+
+    .films__overflow-wrapper {
+        height: 592.5px;
+        // margin-bottom: 12px;
+    }
+
+    .films__wripper {
+        // max-height: 454px;
+        width: 1280px;
+        // background-color: rgb(49, 105, 136);
+    }
+
+    .films__picture {
+        width: 395px;
+    }
+
+    .films__link {
+        width: 395px;
+    }
+
+    .films__card {
+        width: 395px;
+    }
+
+
 }
