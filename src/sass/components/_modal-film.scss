@@ -4,7 +4,7 @@
     pointer-events: none;
 }
 
-.backdrop {
+.backdrop-modal-film {
     position: fixed;
     overflow-y: scroll;
     top: 0;
@@ -54,7 +54,11 @@
     flex-direction: column;
     align-items: center;
 }
-
+.film-render-markup {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
 
 .modal-img-wrapper{
     margin-bottom: 20px;
@@ -125,22 +129,17 @@
     border-radius: 5px;
     font-size: 12px;
     line-height: 1.33;
-}
-
-.btn-watched {
-    background-color: #FF6B01;
-    color: #FFFFFF;
-    border: none;
-    // ADD HOVER AND FOCUS
-}
-
-.btn-queue {
     background-color: #FFFFFF;
     color: #000000;
     border: 1px #000000 solid;
-    // ADD HOVER AND FOCUS
-}
 
+    &:hover,
+    &:focus {
+        background-color: #FF6B01;
+        color: #FFFFFF;
+        border: none;
+    }
+}
 
 @media screen and (min-width: 768px) {
     .modal__container {
@@ -156,6 +155,7 @@
 
     .modal-img-wrapper {
         margin-bottom: 0px;
+        margin-right: 68px;
         width: 264px;
     }
 
@@ -182,7 +182,7 @@
     }
 
     .modal-img-wrapper {
-        margin-bottom: 0px;
+        margin-right: 16px;
         width: 375px;
     }
 
