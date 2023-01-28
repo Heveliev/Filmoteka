@@ -11,8 +11,8 @@ export function renderMoviesCards(moviesObjects) {
           <p class="films__title">${movie.title}</p>
           <div class="films__details">
             <p class="films__genres film-font-style">${createMovieDetalisMarkup(
-              movie
-            )}</p>
+          movie
+        )}</p>
             <span class="films__rate">${movie.vote_average.toFixed(1)}</span>
           </div>
         </a>
