@@ -3,10 +3,11 @@ import { refs } from '../refs/refs';
 export function renderMoviesCards(moviesObjects) {
   return (refs.moviesList.innerHTML = moviesObjects
     .map(
-      movie => `<li class="films__card">
-        <a href="" class="films__link">
-        <div class="films__overflow-wrapper"><img src="https://image.tmdb.org/t/p/w500/${movie.poster_path
-        }"  alt="film poster" class="films__picture" /></div>
+      movie => `<li id='${movie.id}' class="films__card">
+        <a href="#" class="films__link">
+          <img <img src="https://image.tmdb.org/t/p/w500/${
+            movie.poster_path
+          }"  alt="film poster" class="films__picture" />
           <p class="films__title">${movie.title}</p>
           <div class="films__details">
             <p class="films__genres film-font-style">${createMovieDetalisMarkup(
