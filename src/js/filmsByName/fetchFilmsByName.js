@@ -1,6 +1,6 @@
-import { getData } from "../GETAPI/GETAPI";
+import { getData } from "../GETAPI/getData";
 import { createMarkup } from "./markup";
-import { boxGallery, form, failureMassege } from "../refs/refs";
+// import { boxGallery, form, failureMassege } from "../refs/refs";
 
 form.addEventListener('submit', onSearchByName)
 

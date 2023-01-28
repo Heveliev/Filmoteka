@@ -14,3 +14,17 @@ function createMarkup(arr = []) {
 }
 
 export { createMarkup };
+
+// import './js/filmsByName/fetchFilmsByName';
+
+
+
+// const boxGallery = document.querySelector(".films__list");
+// const form = document.querySelector(".header-form");
+// const failureMassege = document.querySelector(".failure-massege");
+
+
+
+
+
+// export { boxGallery, form, failureMassege, moviesList};
