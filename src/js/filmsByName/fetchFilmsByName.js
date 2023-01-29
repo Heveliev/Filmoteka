@@ -33,6 +33,3 @@ async function onSearchByName(e) {
 
 
 export {fetchFilmsByName, onSearchByName};
-// form: document.querySelector(".header-form"),
-//   failureMassege: document.querySelector(".js-failure-massege"),
-//   paginationBox: document.querySelector('.page-number__list'),
