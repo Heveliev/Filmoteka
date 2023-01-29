@@ -11,7 +11,7 @@ let currentPage = 1;
 
 setMoviesGenres();
 
-async function renderTrendingPage() {
+export async function renderTrendingPage() {
   const response = await fetchTrendingMoviesInfo(currentPage);
   const moviesObj = response.results;
 
