@@ -16,4 +16,3 @@ export async function fetchMoviesGenres() {
 
   return axios.get(url).then(response => response.data);
 }
-/* <script type="module" src="./js/renderTrendigMovies/renderTrendingPage.js"></script> */
