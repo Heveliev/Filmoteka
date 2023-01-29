@@ -50,5 +50,7 @@ function openVideoTrailer(id) {
 }
 
 
-/* <script type="module" src="./js/renderTrendigMovies/renderTrendingPage.js"></script> */
+
 // galleryItemsOverlay: document.querySelector('.films__overlay'),
+
+/* <script type="module" src="./js/createTrailer/createTrailer.js"></script> */
