@@ -48,3 +48,7 @@ function openVideoTrailer(id) {
             console.log("Catch Error!");;
         });
 }
+
+
+/* <script type="module" src="./js/renderTrendigMovies/renderTrendingPage.js"></script> */
+// galleryItemsOverlay: document.querySelector('.films__overlay'),
