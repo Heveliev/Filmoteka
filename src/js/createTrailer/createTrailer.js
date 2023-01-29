@@ -13,7 +13,7 @@ const API_KEY = "7752b7319b478a62fea227c419e04b15";
 const API_URL = "https://api.themoviedb.org/3/";
 
 const refs = getRefs();
-axios.defaults.baseURL = API_URL;
+// axios.defaults.baseURL = API_URL;
 
 refs.galleryItemsOverlay.addEventListener('click', onGalleryItemsClick);
 
