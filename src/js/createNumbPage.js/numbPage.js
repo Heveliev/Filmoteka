@@ -85,3 +85,6 @@ async function handlerPagination(evt) {
     pagination(data.page, data.total_pages);
   });
 }
+
+
+// paginationBox: document.querySelector('.page-number__list'),
