@@ -73,7 +73,8 @@ function clearModelFilm() {
 
 function findGenres(filmGenreIds) {
     const savedGenres = JSON.parse(localStorage.getItem('saved-genres'));
-    return textGenres = filmGenreIds.map(genreId => savedGenres[genreId]).join(`, `);
+    // return textGenres = filmGenreIds.map(genreId => savedGenres[genreId]).join(`, `);
+    return filmGenreIds.map(genreId => savedGenres[genreId]).join(`, `);
 } 
 
 function localStorageHandler(film) {
