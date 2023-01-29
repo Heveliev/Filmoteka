@@ -1,16 +1,13 @@
-const filmCard = document.querySelector(".films__list");
-const backdrop = document.querySelector(".backdrop-modal-film");
-const closeBtn = document.querySelector(".modal__close-btn");
-const filmRendering = document.querySelector(".film-render-markup");
+import {refs} from '../refs/refs';
 
 
 
 
-filmCard.addEventListener("click", openModalFilm);
-closeBtn.addEventListener("click", closeModalFilm);
+refs.filmCard.addEventListener("click", openModalFilm);
+refs.closeBtn.addEventListener("click", closeModalFilm);
 
 function openModalFilm(evt) {
-  backdrop.classList.remove("is-hidden");
+  refs.backdrop.classList.remove("is-hidden");
   const filmId = evt.target.closest("li").id;
   const filmArray = JSON.parse(localStorage.getItem("saved-movies"));
   const filmOpened = filmArray.find(film => film.id === Number(filmId));
@@ -21,12 +18,12 @@ function openModalFilm(evt) {
 }
 
 function closeModalFilm() {
-  backdrop.classList.add("is-hidden");
+  refs.backdrop.classList.add("is-hidden");
   clearModelFilm();
 }
 
 function renderModalFilm(film) {
-    return (filmRendering.innerHTML = `
+    return (refs.filmRendering.innerHTML = `
         <div class="modal-img-wrapper">
           <img src="https://image.tmdb.org/t/p/w500/${film.poster_path}" alt="film-poster" />
         </div>
@@ -71,7 +68,7 @@ function renderModalFilm(film) {
 }
 
 function clearModelFilm() {
-  return filmRendering.innerHTML = "";
+  return refs.filmRendering.innerHTML = "";
 }
 
 function findGenres(filmGenreIds) {
@@ -123,4 +120,3 @@ function getQueueActiontext(film) {
 }
 
 
-// {/* <script type="module" src="./js/modalFilm/renderModalFilm.js"></script> */}
