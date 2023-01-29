@@ -5,9 +5,9 @@ export function renderMoviesCards(moviesObjects) {
     .map(
       movie => `<li id='${movie.id}' class="films__card">
         <a href="#" class="films__link">
-          <img <img src="https://image.tmdb.org/t/p/w500/${
+          <img src="${checkPosterImg(
             movie.poster_path
-          }"  alt="film poster" class="films__picture" />
+          )}"  alt="film poster" class="films__picture" />
           <p class="films__title">${movie.title}</p>
           <div class="films__details">
             <p class="films__genres film-font-style">${createMovieDetalisMarkup(
@@ -53,4 +53,12 @@ export function createMovieDetalisMarkup(movie) {
   }
 
   return moviesGenresMarkup + ' | ' + movieReleaseYear;
+}
+
+function checkPosterImg(posterPath) {
+  if (!posterPath) {
+    return 'https://i.postimg.cc/KYV47028/no-poster-available.jpg';
+  } else {
+    return `https://image.tmdb.org/t/p/w500/${posterPath}`;
+  }
 }
