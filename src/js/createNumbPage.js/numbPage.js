@@ -87,4 +87,3 @@ async function handlerPagination(evt) {
 }
 
 
-// paginationBox: document.querySelector('.page-number__list'),
