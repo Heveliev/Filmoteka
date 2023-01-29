@@ -1,15 +1,12 @@
 import axios from 'axios';
 import { fetchTrendingMoviesInfo } from '../GETAPI/fetchTrendingMoviesInfo';
-import { refs } from '../refs/refs';
 import { renderMoviesCards } from '../createMoviesMarkup/renderMoviesCards';
+import { saveMoviesToLoсalStorage } from '../renderTrendigMovies/renderTrendingPage';
+import { refs } from '../refs/refs';
 
-fetchTrendingMoviesInfo().then(data => {
-  renderMoviesCards(data.results);
-  pagination(data.page, data.total_pages);
-});
 let globalCurrentPage = 0;
 
-function pagination(currentPage, allPages) {
+export function renderPagination(currentPage, allPages) {
   let markup = '';
   let beforeTwoPage = currentPage - 2;
   let beforePage = currentPage - 1;
@@ -56,9 +53,15 @@ function pagination(currentPage, allPages) {
   refs.paginationBox.innerHTML = markup;
 }
 
-refs.paginationBox.addEventListener('click', handlerPagination);
+export async function handlerTrendingPagination(evt) {
+  function renderNewMoviesPage(pageNum) {
+    fetchTrendingMoviesInfo(pageNum).then(data => {
+      renderMoviesCards(data.results);
+      renderPagination(data.page, data.total_pages);
+      saveMoviesToLoсalStorage(data.results);
+    });
+  }
 
-async function handlerPagination(evt) {
   if (evt.target.nodeName !== 'LI') {
     return;
   }
@@ -66,24 +69,13 @@ async function handlerPagination(evt) {
     return;
   }
   if (evt.target.textContent === '🡸') {
-    fetchTrendingMoviesInfo((globalCurrentPage -= 1)).then(data => {
-      renderMoviesCards(data.results);
-      pagination(data.page, data.total_pages);
-    });
+    renderNewMoviesPage((globalCurrentPage -= 1));
     return;
   }
   if (evt.target.textContent === '🡺') {
-    fetchTrendingMoviesInfo((globalCurrentPage += 1)).then(data => {
-      renderMoviesCards(data.results);
-      pagination(data.page, data.total_pages);
-    });
+    renderNewMoviesPage((globalCurrentPage += 1));
     return;
   }
   const page = evt.target.textContent;
-  fetchTrendingMoviesInfo(page).then(data => {
-    renderMoviesCards(data.results);
-    pagination(data.page, data.total_pages);
-  });
+  renderNewMoviesPage(page);
 }
-
-
