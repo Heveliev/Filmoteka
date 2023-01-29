@@ -14,7 +14,7 @@ async function onSearchByName(e) {
         return;
     }
 
-    const { results } = await getData(value, page);
+    const { results } = await getData(value, 1);
 
     if (!results.length) {
         refs.failureMassege.innerHTML = 'Search result not successful. Enter the correct movie name and search.';
