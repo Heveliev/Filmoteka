@@ -11,8 +11,8 @@ export function renderMoviesCards(moviesObjects) {
           <p class="films__title">${movie.title}</p>
           <div class="films__details">
             <p class="films__genres film-font-style">${createMovieDetalisMarkup(
-          movie
-        )}</p>
+              movie
+            )}</p>
             <span class="films__rate">${movie.vote_average.toFixed(1)}</span>
           </div>
         </a>
@@ -28,19 +28,29 @@ export function createMovieDetalisMarkup(movie) {
   let movieGenres = [];
   const movieReleaseYear = movie.release_date.slice(0, 4);
 
-  if (!movie.genre_ids.length) {
-    return '';
-  }
-
   for (let i = 0; i < movie.genre_ids.length; i++) {
     movieGenres.push(genres[movie.genre_ids[i]]);
   }
 
+  let moviesGenresMarkup = '';
+
   if (movieGenres.length > 2) {
-    return (
-      movieGenres.splice(0, 2).join(', ') + ', Other | ' + movieReleaseYear
-    );
+    moviesGenresMarkup = movieGenres.splice(0, 2).join(', ') + ', Other';
+  } else {
+    moviesGenresMarkup = movieGenres.join(', ');
   }
 
-  return movieGenres.join(', ') + ' | ' + movieReleaseYear;
+  if (movie.genre_ids.length === 0 && !movie.release_date) {
+    return '';
+  }
+
+  if (movie.genre_ids.length === 0 && movie.release_date) {
+    return movieReleaseYear;
+  }
+
+  if (movie.genre_ids.length !== 0 && !movie.release_date) {
+    return moviesGenresMarkup;
+  }
+
+  return moviesGenresMarkup + ' | ' + movieReleaseYear;
 }
