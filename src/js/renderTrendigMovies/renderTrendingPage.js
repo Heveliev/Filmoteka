@@ -16,6 +16,7 @@ setMoviesGenres();
 
 export async function renderTrendingPage() {
   const response = await fetchTrendingMoviesInfo();
+
   const moviesObj = response.results;
 
   renderMoviesCards(moviesObj);
