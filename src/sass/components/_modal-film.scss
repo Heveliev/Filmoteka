@@ -16,17 +16,27 @@
     transform: scale(1);
 }
 
+.modal-film-description{
+    max-height: calc(100vh - 20px);
+    box-sizing: border-box;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
 .modal__close-btn-icon {
     width: 14px;
     height: 14px;
-    fill: #000000;
+    fill: var(--secondary-text-color);
     // transition: fill ADD FUNCTION;
 
     &:hover,
     &:focus {
-        fill: #FF6B01;
+        fill: var(--btn-hover);
     }
 }
+
 
 .modal__close-btn {
     border: none;
@@ -42,11 +52,9 @@
 }
 
 .modal__container {
-    background-color: #FFFFFF;
+    background-color: var(--primary-background-color);
     padding: 48px 20px 40px 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    border-radius: 7px;
 }
 
 .modal__wrapper {
@@ -54,14 +62,9 @@
     flex-direction: column;
     align-items: center;
 }
-.film-render-markup {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-}
 
 .modal-img-wrapper{
-    margin-bottom: 20px;
+    margin: 0px auto 20px auto;
     width: 240px;
 }
 
@@ -91,11 +94,11 @@
 }
 
 .modal__vote {
-    background-color: #FF6B01;
+    background-color: var(--btn-hover);
     padding: 1px 10px;
     font-size: 12px;
     line-height: 1.17;
-    color: #FFFFFF;
+    color: var(--primary-background-color);
     border-radius: 5px;
 }
 
@@ -104,7 +107,7 @@
     padding: 1px 10px;
     font-size: 12px;
     line-height: 1.17;
-    color: #000000;
+    color: var(--secondary-text-color);
     border-radius: 5px;
 }
 
@@ -129,24 +132,36 @@
     border-radius: 5px;
     font-size: 12px;
     line-height: 1.33;
-    background-color: #FFFFFF;
-    color: #000000;
-    border: 1px #000000 solid;
+    background-color: var(--primary-background-color);
+    color: var(--secondary-text-color);
+    border: 1px var(--secondary-text-color) solid;
 
     &:hover,
     &:focus {
-        background-color: #FF6B01;
-        color: #FFFFFF;
+        background-color: var(--btn-hover);
+        color: var(--primary-background-color);
         border: none;
     }
 }
 
 @media screen and (min-width: 768px) {
     .modal__container {
+        width: 704px;
         padding: 40px 36px;
     }
 
+    .modal-film-description {
+        top: 50%;
+    }
+
+    .film-render-markup {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }   
+
     .modal__container {
+        display: flex;
         flex-direction: row;
         gap: 68px;
         justify-content: center;
@@ -172,6 +187,7 @@
 @media screen and (min-width: 1024px) {
     .modal__container {
         padding: 40px 12px;
+        width: 806px;
     }
 
     .modal__container {
