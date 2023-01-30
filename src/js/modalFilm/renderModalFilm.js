@@ -128,5 +128,3 @@ function getQueueActiontext(film) {
   let queueData = JSON.parse(localStorage.getItem("queue-films")) || [];
   return queueData.find(item => item.id === film.id) ? "REMOVE FROM QUEUE" : "ADD TO QUEUE";
 }
-
-
