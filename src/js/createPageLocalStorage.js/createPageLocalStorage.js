@@ -1,5 +1,4 @@
 
-
 async function handlerTrendingPagination(evt) {
   function renderNewMoviesPage(pageNum) {
     localStorage.getItem(pageNum).then(data => {
