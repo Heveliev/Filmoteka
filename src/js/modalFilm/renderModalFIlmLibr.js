@@ -1,17 +1,19 @@
-import {refs} from '../refs/refs';
+const librList = document.querySelector('.films__list-libr');
+const backdrop = document.querySelector('.backdrop-modal-film');
+const filmRendering = document.querySelector('.film-render-markup');
 
-refs.filmCard.addEventListener("click", openModalFilm);
+librList.addEventListener("click", openModalFilm);
 
 
 function openModalFilm(evt) {
-  refs.backdrop.classList.remove("is-hidden");
+backdrop.classList.remove("is-hidden");
   document.body.style.overflow = 'hidden';
 
   const filmId = evt.target.closest("li").id;
   const filmArray = JSON.parse(localStorage.getItem("saved-movies"));
   const filmOpened = filmArray.find(film => film.id === Number(filmId));
 
-  renderModalFilm(filmOpened);
+  renderModalFilmLibr(filmOpened);
   findGenres(filmOpened.genre_ids);
   localStorageHandler(filmOpened);
 
@@ -26,14 +28,14 @@ function closeModalFilm(evt) {
     evt.target.matches(".modal__close-btn-icon-svg") ||
     evt.target.matches(".backdrop-modal-film") ||
     evt.code === "Escape") {
-    refs.backdrop.classList.add("is-hidden");
+backdrop.classList.add("is-hidden");
     document.body.style.overflow = 'auto';
     clearModalFilm();
   }
 }
 
-function renderModalFilm(film) {
-    return (refs.filmRendering.innerHTML = `
+function renderModalFilmLibr(film) {
+    return (filmRendering.innerHTML = `
         <div class="modal-img-wrapper">
           <img src="https://image.tmdb.org/t/p/w500/${film.poster_path}" alt="film-poster" />
         </div>
@@ -78,7 +80,7 @@ function renderModalFilm(film) {
 }
 
 function clearModalFilm() {
-  return refs.filmRendering.innerHTML = "";
+  return filmRendering.innerHTML = "";
 }
 
 function findGenres(filmGenreIds) {

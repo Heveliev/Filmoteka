@@ -3,6 +3,7 @@ import { refs } from '../refs/refs';
 export function renderMoviesCards(moviesObjects) {
   return (refs.moviesList.innerHTML = moviesObjects
     .map(
+
       movie => `<li id='${movie.id}' class="films__card">
           <div class="films__overflow-wrapper">
             <img src="${checkPosterImg(
@@ -22,6 +23,8 @@ export function renderMoviesCards(moviesObjects) {
 }
 
 export function createMovieDetalisMarkup(movie) {
+  // console.log(movie.id);
+
   const savedGenres = localStorage.getItem('saved-genres');
   const genres = JSON.parse(savedGenres);
 
