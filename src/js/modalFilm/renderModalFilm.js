@@ -1,13 +1,12 @@
 import {refs} from '../refs/refs';
 
-
-
-
 refs.filmCard.addEventListener("click", openModalFilm);
-refs.closeBtn.addEventListener("click", closeModalFilm);
+
 
 function openModalFilm(evt) {
   refs.backdrop.classList.remove("is-hidden");
+  document.body.style.overflow = 'hidden';
+
   const filmId = evt.target.closest("li").id;
   const filmArray = JSON.parse(localStorage.getItem("saved-movies"));
   const filmOpened = filmArray.find(film => film.id === Number(filmId));
@@ -15,11 +14,22 @@ function openModalFilm(evt) {
   renderModalFilm(filmOpened);
   findGenres(filmOpened.genre_ids);
   localStorageHandler(filmOpened);
+
+  document.addEventListener("click", closeModalFilm);
+  window.addEventListener("keydown", closeModalFilm);
+
 }
 
-function closeModalFilm() {
-  refs.backdrop.classList.add("is-hidden");
-  clearModelFilm();
+function closeModalFilm(evt) {
+  if (evt.target.matches(".modal__close-btn") ||
+    evt.target.matches(".modal__close-btn-icon") ||
+    evt.target.matches(".modal__close-btn-icon-svg") ||
+    evt.target.matches(".backdrop-modal-film") ||
+    evt.code === "Escape") {
+    refs.backdrop.classList.add("is-hidden");
+    document.body.style.overflow = 'auto';
+    clearModalFilm();
+  }
 }
 
 function renderModalFilm(film) {
@@ -42,7 +52,7 @@ function renderModalFilm(film) {
             </tr>
             <tr class="modal__table-row">
               <td class="modal__first-column">Popularity</td>
-              <td>${Math.round(film.popularity)}</td>
+              <td>${Math.round(film.popularity * 10)/10}</td>
             </tr>
             <tr class="modal__table-row">
               <td class="modal__first-column">Original Title</td>
@@ -67,13 +77,12 @@ function renderModalFilm(film) {
     )
 }
 
-function clearModelFilm() {
+function clearModalFilm() {
   return refs.filmRendering.innerHTML = "";
 }
 
 function findGenres(filmGenreIds) {
     const savedGenres = JSON.parse(localStorage.getItem('saved-genres'));
-    // return textGenres = filmGenreIds.map(genreId => savedGenres[genreId]).join(`, `);
     return filmGenreIds.map(genreId => savedGenres[genreId]).join(`, `);
 } 
 

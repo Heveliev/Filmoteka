@@ -12,7 +12,7 @@
     z-index: 100;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.2);
+    background-color: rgba(0, 0, 0, 0.5);
     transform: scale(1);
 }
 
@@ -36,7 +36,6 @@
         fill: var(--btn-hover);
     }
 }
-
 
 .modal__close-btn {
     border: none;
@@ -140,7 +139,7 @@
     &:focus {
         background-color: var(--btn-hover);
         color: var(--primary-background-color);
-        border: none;
+        border: 1px var(--primary-background-color) solid;
     }
 }
 
@@ -157,7 +156,7 @@
     .film-render-markup {
         display: flex;
         flex-direction: row;
-        align-items: center;
+        align-items: flex-start;
     }   
 
     .modal__container {
