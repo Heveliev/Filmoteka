@@ -49,13 +49,14 @@ function allPage(value) {
   let countOfItems = Math.ceil(watch.length / notesOnPage);
 }
 
-
-
-
 //   1 стр - 0 - 20
 //   2 стр - 20 - 40
 //   3 стр - 40 - 60
 
-// let start = (globalCurrentPage - 1) * notesOnPage;
-// let end = start + notesOnPage;
-// let notes = q.slice(start, end);
+let start = (globalCurrentPage - 1) * notesOnPage;
+let end = start + notesOnPage;
+
+let notes = q.slice(start, end);
+let notesWatch = watch.splice(start, end);
+// console.log(notes);
+// console.log(notesWatch);
