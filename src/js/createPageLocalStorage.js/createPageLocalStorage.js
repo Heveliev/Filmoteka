@@ -1,13 +1,17 @@
+import {q} from './fetchpars'
+import { watch } from './fetchpars';
+import { renderMoviesCards } from '../createMoviesMarkup/renderMoviesCards';
+import {renderPagination, handlerTrendingPagination} from '../createNumbPage.js/numbPage';
+
+let globalCurrentPage = 0;
 
 async function handlerTrendingPagination(evt) {
-  function renderNewMoviesPage(pageNum) {
-    localStorage.getItem(pageNum).then(data => {
+  function renderNewMoviesPageQ(pageNum) {
+    q.forEach(data => {
       renderMoviesCards(data.results);
       renderPagination(data.page, data.total_pages);
-      saveMoviesToLoсalStorage(data.results);
     });
   }
-
   if (evt.target.nodeName !== 'LI') {
     return;
   }
@@ -26,13 +30,32 @@ async function handlerTrendingPagination(evt) {
   renderNewMoviesPage(page);
 }
 
-let notesOnPage = 20;
-let countOfItems = Math.ceil(localStorage.length / notesOnPage);
+function renderNewMoviesPageWatch(pageNum) {
+  watch.forEach(data => {
+    renderMoviesCards(data.results);
+    renderPagination(data.page, data.total_pages);
+  });
+}
+
+let notesOnPage;
+
+function totalPage(totalValue) {
+  notesOnPage = 20;
+  let countOfItems = Math.ceil(q.length / notesOnPage);
+}
+
+function allPage(value) {
+  notesOnPage = 20;
+  let countOfItems = Math.ceil(watch.length / notesOnPage);
+}
+
+
+
 
 //   1 стр - 0 - 20
 //   2 стр - 20 - 40
 //   3 стр - 40 - 60
 
-let start = (globalCurrentPage - 1) * notesOnPage;
-let end = start + notesOnPage;
-let notes = localStorage.slice(start, end);
+// let start = (globalCurrentPage - 1) * notesOnPage;
+// let end = start + notesOnPage;
+// let notes = q.slice(start, end);
