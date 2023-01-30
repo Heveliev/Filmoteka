@@ -1,5 +1,5 @@
 // import { refs } from '../refs/refs';
-import { renderMoviesCards } from '../createMoviesMarkup/renderMoviesCards';
+// import { renderMoviesCards } from '../createMoviesMarkup/renderMoviesCards';
 const moviesList = document.querySelector('.films__list');
 const watched = document.querySelector('.watched-films');
 const queue = document.querySelector('.queue-films');
