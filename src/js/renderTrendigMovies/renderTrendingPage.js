@@ -11,7 +11,7 @@ import { refs } from '../refs/refs';
 setMoviesGenres();
 
 export async function renderTrendingPage() {
-  refs.loader.style.display = 'none';
+  // refs.loader.style.display = 'none';
 
   const response = await fetchTrendingMoviesInfo();
   const moviesObj = response.results;
