@@ -1,56 +1,97 @@
 import * as basicLightbox from 'basiclightbox';
-import axios from 'axios';
 import Notiflix from "notiflix";
 
-
+const API_KEY = "7752b7319b478a62fea227c419e04b15";
+const API_URL = "https://api.themoviedb.org/3/";
 
 const getRefs = () => {
     return {
         galleryItemsOverlay: document.querySelector('.films__list'),
+        body: document.querySelector('body'),
     }
 }
-const API_KEY = "7752b7319b478a62fea227c419e04b15";
-const API_URL = "https://api.themoviedb.org/3/";
 
 const refs = getRefs();
-// axios.defaults.baseURL = API_URL;
-
 refs.galleryItemsOverlay.addEventListener('click', onGalleryItemsClick);
 
 function onGalleryItemsClick(e) {
     // console.log(e.target.className);
+    // console.log(e.target.parentNode.parentNode.parentNode.parentNode.id);
+
     if (e.target.className !== 'films__overlay' && e.target.className !== 'films__trailer-text') {
         console.log("Click Error!");
         return
     }
     else {
         e.preventDefault;
-        const cardId = (e.target.parentNode.parentNode.parentNode.parentNode.dataset.id);
+        const cardId = (e.target.parentNode.parentNode.parentNode.parentNode.dataset.id || e.target.parentNode.parentNode.parentNode.dataset.id);
+        // console.log(cardId);
         openVideoTrailer(cardId);
     }
 }
 
 function openVideoTrailer(id) {
-    const url = `https://api.themoviedb.org/3/movie/${id}/videos?api_key=${API_KEY}`;//&language=en-US
-    // Notiflix.Loading.pulse();
+    const url = `${API_URL}movie/${id}/videos?api_key=${API_KEY}&language=en-US`;
+    // console.log(url);
+    Notiflix.Loading.pulse();
     fetch(url)
         .then(response => response.json())
         .then(data => {
+            console.log("fetch Succes!");
             console.log(data.results[0].key + " : Youtube key");
             const id = data.results[0].key;
             // const instance = basicLightbox.create(`<iframe src="https://www.youtube.com/embed/${id}" width="560" height="315" frameborder="0"></iframe>`);
-
-            const instance = basicLightbox.create(`<iframe width="80%" height="80%" src='https://www.youtube.com/embed/${id}'frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`);
-            console.log("instance");
+            console.log(`https://www.youtube.com/embed/${id}`);
+            const instance = basicLightbox.create(`<iframe width="80%" height="80%" src='https://www.youtube.com/embed/${id}'frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`, {
+                onShow: (instance) => { refs.body.style.overflow = 'hidden'; },
+                onClose: (instance) => { refs.body.style.overflow = 'inherit'; }
+            });
             instance.show();
+            window.setTimeout(e => {
+                Notiflix.Loading.remove();
+            }
+                , 2000);
+            filmCloseTrailer(instance);
         })
         .catch(() => {
-            console.log("Catch Error!");;
+            console.log("Catch Error!");
+            const instance = basicLightbox.create(`
+            <iframe width="0%" height="0%" src='' frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            `, {
+                onShow: (instance) => { refs.body.style.overflow = 'hidden'; },
+                onClose: (instance) => { refs.body.style.overflow = 'inherit'; }
+            });
+            instance.show();
+            filmCloseTrailer(instance);
+            window.setTimeout(e => {
+                Notiflix.Loading.remove();
+            }, 1500);
         });
 }
 
+function filmCloseTrailer(instance) {
+    window.addEventListener('keydown', (event) => checkPressKey(event, instance));
+    const closeBtn = document.querySelector('.basicLightbox--iframe');
+    closeBtn.insertAdjacentHTML(
+        'afterbegin',
+        `<button type="button" class="film-trailer__closeBtn" data-action="close-lightbox">&#10005</button>`,
+    );
 
+    const trailerCloseBtn = document.querySelector(
+        '[data-action="close-lightbox"]',
+    );
 
-// galleryItemsOverlay: document.querySelector('.films__overlay'),
+    trailerCloseBtn.addEventListener('click', onCloseTrailer);
 
-/* <script type="module" src="./js/createTrailer/createTrailer.js"></script> */
+    function onCloseTrailer(e) {
+        instance.close();
+    }
+}
+
+const checkPressKey = (event, instance) => {
+    if (event.code === 'Escape') {
+        instance.close();
+        refs().body.style.overflow = 'inherit';
+        window.removeEventListener('keydown', (event) => checkPressKey(event, instance));
+    }
+}

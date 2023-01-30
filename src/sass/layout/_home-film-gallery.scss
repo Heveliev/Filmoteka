@@ -71,6 +71,14 @@
     overflow: visible;
 }
 
+.films__trailer-text {
+    cursor: pointer;
+}
+
+.films__overlay:hover {
+    color: yellow;
+}
+
 img.films__picture:hover {
     // display: block;
     transition: transform 0.25s;
@@ -117,6 +125,17 @@ img.films__picture:hover {
     border-radius: 5px;
 }
 
+.film-trailer__closeBtn {
+    z-index: 3;
+    font-size: 32px;
+    position: absolute;
+    right: 6%;
+    top: 5%;
+    color: red;
+    background-color: black;
+    border-radius: 100%;
+    border-color: red;
+}
 
 
 
@@ -149,6 +168,9 @@ img.films__picture:hover {
         width: 280px;
     }
 
+    .films__overlay {
+        padding-top: 4px;
+    }
 }
 
 
@@ -178,7 +200,9 @@ img.films__picture:hover {
         width: 336px;
     }
 
-
+    .films__overlay {
+        padding-top: 7px;
+    }
 
     .films__card {
         width: 336px;
@@ -215,5 +239,8 @@ img.films__picture:hover {
         width: 395px;
     }
 
+    .films__overlay {
+        padding-top: 10px;
+    }
 
 }

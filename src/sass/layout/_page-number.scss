@@ -1,6 +1,6 @@
 .page-number {
   cursor: pointer;
-  width: 1280px;
+  // width: 1280px;
   margin: 0 auto;
 }
 
@@ -21,6 +21,7 @@
   line-height: 1.33;
   color: #000000;
 }
+
 .current_page {
   display: flex;
   align-items: center;

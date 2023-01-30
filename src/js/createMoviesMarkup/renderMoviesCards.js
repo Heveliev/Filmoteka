@@ -7,15 +7,15 @@ export function renderMoviesCards(moviesObjects) {
         <div class="films__overflow-wrapper"><img src="https://image.tmdb.org/t/p/w500/${movie.poster_path
         }"  alt="film poster" class="films__picture" />
         <div class="films__overlay">
-        <p class="films__trailer-text">Watch trailer</p>
+        <p class="films__trailer-text">&#x25b6 Watch trailer</p>
         <img src="" alt="" class="films__trailer-icon">
       </div>
         </div>
           <p class="films__title">${movie.title}</p>
           <div class="films__details">
             <p class="films__genres film-font-style">${createMovieDetalisMarkup(
-              movie
-            )}</p>
+        movie
+      )}</p>
             <span class="films__rate">${movie.vote_average.toFixed(1)}</span>
           </div>
         </div>
