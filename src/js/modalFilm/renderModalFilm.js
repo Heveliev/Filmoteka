@@ -1,28 +1,41 @@
-import { refs } from '../refs/refs';
-refs.filmCard.addEventListener('click', openModalFilm);
-refs.closeBtn.addEventListener('click', closeModalFilm);
+import {refs} from '../refs/refs';
+
+refs.filmCard.addEventListener("click", openModalFilm);
+
+
 function openModalFilm(evt) {
-  refs.backdrop.classList.remove('is-hidden');
-  const filmId = evt.target.closest('li').id;
-  const filmArray = JSON.parse(localStorage.getItem('saved-movies'));
+  refs.backdrop.classList.remove("is-hidden");
+  document.body.style.overflow = 'hidden';
+
+  const filmId = evt.target.closest("li").id;
+  const filmArray = JSON.parse(localStorage.getItem("saved-movies"));
   const filmOpened = filmArray.find(film => film.id === Number(filmId));
 
   renderModalFilm(filmOpened);
   findGenres(filmOpened.genre_ids);
   localStorageHandler(filmOpened);
+
+  document.addEventListener("click", closeModalFilm);
+  window.addEventListener("keydown", closeModalFilm);
+
 }
 
-function closeModalFilm() {
-  refs.backdrop.classList.add('is-hidden');
-  clearModelFilm();
+function closeModalFilm(evt) {
+  if (evt.target.matches(".modal__close-btn") ||
+    evt.target.matches(".modal__close-btn-icon") ||
+    evt.target.matches(".modal__close-btn-icon-svg") ||
+    evt.target.matches(".backdrop-modal-film") ||
+    evt.code === "Escape") {
+    refs.backdrop.classList.add("is-hidden");
+    document.body.style.overflow = 'auto';
+    clearModalFilm();
+  }
 }
 
 function renderModalFilm(film) {
-  return (refs.filmRendering.innerHTML = `
+    return (refs.filmRendering.innerHTML = `
         <div class="modal-img-wrapper">
-          <img src="https://image.tmdb.org/t/p/w500/${
-            film.poster_path
-          }" alt="film-poster" />
+          <img src="https://image.tmdb.org/t/p/w500/${film.poster_path}" alt="film-poster" />
         </div>
         <div class="modal__wrapper">
           <h2 class="modal__film-title">${film.title}</h2>
@@ -39,7 +52,7 @@ function renderModalFilm(film) {
             </tr>
             <tr class="modal__table-row">
               <td class="modal__first-column">Popularity</td>
-              <td>${Math.round(film.popularity)}</td>
+              <td>${Math.round(film.popularity * 10)/10}</td>
             </tr>
             <tr class="modal__table-row">
               <td class="modal__first-column">Original Title</td>
@@ -57,38 +70,34 @@ function renderModalFilm(film) {
             </p>
           </div>
           <div class="modal__buttons">
-            <button class="modal-btn btn-watched">${getWatchActionText(
-              film
-            )}</button>
-            <button class="modal-btn btn-queue">${getQueueActiontext(
-              film
-            )}</button>
+            <button class="modal-btn btn-watched">${getWatchActionText(film)}</button>
+            <button class="modal-btn btn-queue">${getQueueActiontext(film)}</button>
           </div>
-        </div>`);
+        </div>`
+    )
 }
 
-function clearModelFilm() {
-  return (refs.filmRendering.innerHTML = '');
+function clearModalFilm() {
+  return refs.filmRendering.innerHTML = "";
 }
 
 function findGenres(filmGenreIds) {
-  const savedGenres = JSON.parse(localStorage.getItem('saved-genres'));
-  // return textGenres = filmGenreIds.map(genreId => savedGenres[genreId]).join(`, `);
-  return filmGenreIds.map(genreId => savedGenres[genreId]).join(`, `);
-}
+    const savedGenres = JSON.parse(localStorage.getItem('saved-genres'));
+    return filmGenreIds.map(genreId => savedGenres[genreId]).join(`, `);
+} 
 
 function localStorageHandler(film) {
-  const toWatchedBtn = document.querySelector('.btn-watched');
-  const queueBtn = document.querySelector('.btn-queue');
+  const toWatchedBtn = document.querySelector(".btn-watched");
+  const queueBtn = document.querySelector(".btn-queue");
 
-  const WATCHED_KEY = 'watched-films';
-  const QUEUE_KEY = 'queue-films';
+  const WATCHED_KEY = "watched-films";
+  const QUEUE_KEY = "queue-films";
 
-  toWatchedBtn.addEventListener('click', addToWatched);
-  queueBtn.addEventListener('click', addToQueue);
+  toWatchedBtn.addEventListener("click", addToWatched);
+  queueBtn.addEventListener("click", addToQueue);
 
   function addToWatched() {
-    let watchedData = JSON.parse(localStorage.getItem('watched-films')) || [];
+    let watchedData = JSON.parse(localStorage.getItem("watched-films")) || [];
     if (!watchedData.find(item => item.id === film.id)) {
       watchedData.push(film);
     } else {
@@ -99,7 +108,7 @@ function localStorageHandler(film) {
   }
 
   function addToQueue() {
-    let queueData = JSON.parse(localStorage.getItem('queue-films')) || [];
+    let queueData = JSON.parse(localStorage.getItem("queue-films")) || [];
     if (!queueData.find(item => item.id === film.id)) {
       queueData.push(film);
     } else {
@@ -111,15 +120,11 @@ function localStorageHandler(film) {
 }
 
 function getWatchActionText(film) {
-  let watchedData = JSON.parse(localStorage.getItem('watched-films')) || [];
-  return watchedData.find(item => item.id === film.id)
-    ? 'REMOVE FROM WATCHED'
-    : 'ADD TO WATCHED';
+  let watchedData = JSON.parse(localStorage.getItem("watched-films")) || [];
+  return watchedData.find(item => item.id === film.id) ? "REMOVE FROM WATCHED" : "ADD TO WATCHED";
 }
 
 function getQueueActiontext(film) {
-  let queueData = JSON.parse(localStorage.getItem('queue-films')) || [];
-  return queueData.find(item => item.id === film.id)
-    ? 'REMOVE FROM QUEUE'
-    : 'ADD TO QUEUE';
+  let queueData = JSON.parse(localStorage.getItem("queue-films")) || [];
+  return queueData.find(item => item.id === film.id) ? "REMOVE FROM QUEUE" : "ADD TO QUEUE";
 }
