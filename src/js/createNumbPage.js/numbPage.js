@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { fetchTrendingMoviesInfo } from '../GETAPI/fetchTrendingMoviesInfo';
 import { renderMoviesCards } from '../createMoviesMarkup/renderMoviesCards';
-import { saveMoviesToLoсalStorage } from '../renderTrendigMovies/renderTrendingPage';
+import { saveMoviesToLoсalStorage, scrollToTop } from '../common/common';
 import { refs } from '../refs/refs';
 
 let globalCurrentPage = 0;
@@ -57,6 +57,7 @@ export async function handlerTrendingPagination(evt) {
   function renderNewMoviesPage(pageNum) {
     fetchTrendingMoviesInfo(pageNum).then(data => {
       renderMoviesCards(data.results);
+      scrollToTop();
       renderPagination(data.page, data.total_pages);
       saveMoviesToLoсalStorage(data.results);
     });
