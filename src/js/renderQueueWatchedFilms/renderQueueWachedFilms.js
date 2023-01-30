@@ -1,6 +1,6 @@
-import { refs } from '../refs/refs';
+// import { refs } from '../refs/refs';
 import { renderMoviesCards } from '../createMoviesMarkup/renderMoviesCards';
-
+const moviesList = document.querySelector('.films__list');
 const watched = document.querySelector('.watched-films');
 const queue = document.querySelector('.queue-films');
 const btnList = document.querySelector('.button-list');
@@ -41,7 +41,7 @@ function onBtnClick(e) {
 }
 
 function fooError(key) {
-  return (refs.moviesList.innerHTML = `
+  return (moviesList.innerHTML = `
   <img src="https://kartinkof.club/uploads/posts/2022-03/1648361803_4-kartinkof-club-p-mem-obezyana-smotrit-v-storonu-5.jpg" alt="monkey" width="400" height="200">
   <p>Opss... you haven't added any movies to ${key}</p>
 `);
