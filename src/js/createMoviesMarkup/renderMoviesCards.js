@@ -4,10 +4,11 @@ export function renderMoviesCards(moviesObjects) {
   return (refs.moviesList.innerHTML = moviesObjects
     .map(
       movie => `<li id='${movie.id}' class="films__card">
-        <a href="#" class="films__link">
-          <img src="${checkPosterImg(
-            movie.poster_path
-          )}"  alt="film poster" class="films__picture" />
+          <div class="films__overflow-wrapper">
+            <img src="${checkPosterImg(
+              movie.poster_path
+            )}"  alt="film poster" class="films__picture" />
+          </div>
           <p class="films__title">${movie.title}</p>
           <div class="films__details">
             <p class="films__genres film-font-style">${createMovieDetalisMarkup(
@@ -15,8 +16,7 @@ export function renderMoviesCards(moviesObjects) {
             )}</p>
             <span class="films__rate">${movie.vote_average.toFixed(1)}</span>
           </div>
-        </a>
-      </li>`
+        </li>`
     )
     .join(''));
 }
