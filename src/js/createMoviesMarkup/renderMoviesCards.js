@@ -3,13 +3,13 @@ import { refs } from '../refs/refs';
 export function renderMoviesCards(moviesObjects) {
   return (refs.moviesList.innerHTML = moviesObjects
     .map(
-      movie => `<li class="films__card" id=${movie.id}> <div class="films__link">
-        <div class="films__overflow-wrapper"><img src="https://image.tmdb.org/t/p/w500/${movie.poster_path}"  alt="film poster" class="films__picture" />
-        <div class="films__overlay">
-        <p class="films__trailer-text">Watch trailer</p>
-        <img src="" alt="" class="films__trailer-icon">
-      </div>
-        </div>
+
+      movie => `<li id='${movie.id}' class="films__card">
+          <div class="films__overflow-wrapper">
+            <img src="${checkPosterImg(
+              movie.poster_path
+            )}"  alt="film poster" class="films__picture" />
+          </div>
           <p class="films__title">${movie.title}</p>
           <div class="films__details">
             <p class="films__genres film-font-style">${createMovieDetalisMarkup(
@@ -17,8 +17,7 @@ export function renderMoviesCards(moviesObjects) {
             )}</p>
             <span class="films__rate">${movie.vote_average.toFixed(1)}</span>
           </div>
-        </div>
-      </li>`
+        </li>`
     )
     .join(''));
 }
