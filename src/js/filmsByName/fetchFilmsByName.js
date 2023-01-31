@@ -1,10 +1,13 @@
 import { getData } from "../getapi/getData";
-import { refs } from "../refs/refs";
 import { renderMoviesCards } from "../createMoviesMarkup/renderMoviesCards";
 import { renderTrendingPage } from "../renderTrendigMovies/renderTrendingPage";
 import { saveMoviesToLoсalStorage} from "../common/common";
 import { renderPagination } from "../createNumbPage.js/numbPage";
-
+const refs = {
+    form: document.querySelector('.header-form'),
+    failureMassege: document.querySelector('.js-failure-massege'),
+    paginationBox: document.querySelector('.page-number__list'),
+  };
 
 refs.form.addEventListener('submit', onSearchByName)
 let value;
