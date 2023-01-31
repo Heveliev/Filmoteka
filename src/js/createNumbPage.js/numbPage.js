@@ -1,8 +1,10 @@
-import axios from 'axios';
 import { fetchTrendingMoviesInfo } from '../GETAPI/fetchTrendingMoviesInfo';
 import { renderMoviesCards } from '../createMoviesMarkup/renderMoviesCards';
 import { saveMoviesToLoсalStorage, scrollToTop } from '../common/common';
-import { refs } from '../refs/refs';
+
+const refs = {
+  paginationBox: document.querySelector('.page-number__list'),
+};
 
 let globalCurrentPage = 0;
 
