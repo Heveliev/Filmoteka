@@ -1,7 +1,8 @@
 import { getData } from "../getapi/getData";
 import { refs } from "../refs/refs";
 import { renderMoviesCards } from "../createMoviesMarkup/renderMoviesCards";
-import { renderTrendingPage, saveMoviesToLoсalStorage } from "../renderTrendigMovies/renderTrendingPage";
+import { renderTrendingPage } from "../renderTrendigMovies/renderTrendingPage";
+import { saveMoviesToLoсalStorage} from "../common/common";
 import { renderPagination } from "../createNumbPage.js/numbPage";
 
 
