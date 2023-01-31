@@ -2,12 +2,15 @@ const refs = {
   filmCard: document.querySelector('.films__list'),
   backdrop: document.querySelector('.backdrop-modal-film'),
   filmRendering: document.querySelector('.film-render-markup'),
+  
 };
 
 refs.filmCard.addEventListener('click', openModalFilm);
 
 function openModalFilm(evt) {
-  if (evt.target !== evt.currentTarget) {
+  const test = document.querySelector(".films__overlay");
+  const testTest = document.querySelector(".films__trailer-text");
+  if (evt.target !== evt.currentTarget && evt.target !== test && evt.target !== testTest) {
   refs.backdrop.classList.remove('is-hidden');
   document.body.style.overflow = 'hidden';
 
@@ -21,7 +24,9 @@ function openModalFilm(evt) {
 
   document.addEventListener('click', closeModalFilm);
   window.addEventListener('keydown', closeModalFilm);
-} }
+  }
+
+}
 
 function closeModalFilm(evt) {
   if (
