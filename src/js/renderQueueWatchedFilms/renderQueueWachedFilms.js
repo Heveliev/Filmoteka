@@ -1,4 +1,5 @@
 import { renderMoviesCards } from '../createMoviesMarkup/renderMoviesCards';
+import { hidePageLoadSpinner } from '../common/common';
 
 const watched = document.querySelector('.watched-films');
 const queue = document.querySelector('.queue-films');
@@ -12,11 +13,14 @@ const parseResp = JSON.parse(resp);
 
 if (!parseResp.length) {
   fooError(key);
+  hidePageLoadSpinner();
 } else {
   try {
     renderMoviesCards(parseResp);
+    hidePageLoadSpinner();
   } catch (error) {
     fooError(key);
+    hidePageLoadSpinner();
   }
 }
 
