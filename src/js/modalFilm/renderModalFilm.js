@@ -1,9 +1,17 @@
+import { renderMoviesCards } from '../createMoviesMarkup/renderMoviesCards';  
+
+
+
 const refs = {
   filmCard: document.querySelector('.films__list'),
   backdrop: document.querySelector('.backdrop-modal-film'),
   filmRendering: document.querySelector('.film-render-markup'),
-  
+  // librPage: document.querySelector('.js-libr'),
 };
+
+const librPage = document.querySelector("#js-libr");
+const queuePage = document.querySelector("#queue-films");
+const watchedPage = document.querySelector("#watched-films");
 
 refs.filmCard.addEventListener('click', openModalFilm);
 
@@ -36,8 +44,9 @@ function closeModalFilm(evt) {
     refs.backdrop.classList.add('is-hidden');
     document.body.style.overflow = 'auto';
     clearModalFilm();
+
   }
-}
+} 
 
 function renderModalFilm(film) {
   return (refs.filmRendering.innerHTML = `
@@ -117,6 +126,10 @@ function localStorageHandler(film) {
     }
     localStorage.setItem(WATCHED_KEY, JSON.stringify(watchedData));
     toWatchedBtn.textContent = getWatchActionText(film);
+    if (librPage.classList.contains("current") && watchedPage.classList.contains("current-page")) {
+      renderMoviesCards(watchedData);
+    }
+
   }
 
   function addToQueue() {
@@ -128,6 +141,9 @@ function localStorageHandler(film) {
     }
     localStorage.setItem(QUEUE_KEY, JSON.stringify(queueData));
     queueBtn.textContent = getQueueActiontext(film);
+        if (librPage.classList.contains("current") && queuePage.classList.contains("current-page")) {
+      renderMoviesCards(queueData);
+    }
   }
 }
 

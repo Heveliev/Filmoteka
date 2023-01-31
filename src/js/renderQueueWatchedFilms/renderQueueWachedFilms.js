@@ -26,7 +26,7 @@ if (!parseResp.length) {
 
 btnList.addEventListener('click', onBtnClick);
 
-function onBtnClick(e) {
+export function onBtnClick(e) {
   e.preventDefault();
   key = e.target.id;
   console.dir(key);
