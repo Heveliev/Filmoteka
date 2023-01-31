@@ -2,8 +2,8 @@ import { getData } from "../getapi/getData";
 import { refs } from "../refs/refs";
 import { renderMoviesCards } from "../createMoviesMarkup/renderMoviesCards";
 import { renderTrendingPage, saveMoviesToLoсalStorage } from "../renderTrendigMovies/renderTrendingPage";
-import { renderPagination } from "../createNumbPage.js/numbPage"
-// import { renderPagination } from "../createNumbPage.js/numbPage"
+import { renderPagination } from "../createNumbPage.js/numbPage";
+
 
 refs.form.addEventListener('submit', onSearchByName)
 let value;
