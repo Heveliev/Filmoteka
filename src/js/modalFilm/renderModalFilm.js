@@ -7,20 +7,21 @@ const refs = {
 refs.filmCard.addEventListener('click', openModalFilm);
 
 function openModalFilm(evt) {
+  if (evt.target !== evt.currentTarget) {
   refs.backdrop.classList.remove('is-hidden');
   document.body.style.overflow = 'hidden';
 
   const filmId = evt.target.closest('li').id;
   const filmArray = JSON.parse(localStorage.getItem('saved-movies'));
   const filmOpened = filmArray.find(film => film.id === Number(filmId));
-
+  
   renderModalFilm(filmOpened);
   findGenres(filmOpened.genre_ids);
   localStorageHandler(filmOpened);
 
   document.addEventListener('click', closeModalFilm);
   window.addEventListener('keydown', closeModalFilm);
-}
+} }
 
 function closeModalFilm(evt) {
   if (
