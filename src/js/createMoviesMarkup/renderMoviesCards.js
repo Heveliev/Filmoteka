@@ -11,9 +11,9 @@ export function renderMoviesCards(moviesObjects) {
               movie.poster_path
             )}"  alt="film poster" class="films__picture" />
             <div class="films__overlay">
-              <p class="films__trailer-text">Watch trailer</p>
-              <!-- <img src="" alt="test" class="films__trailer-icon"> -->
-            </div>
+            <p class="films__trailer-text"> Watch trailer</p>
+            <img src="" alt="" class="films__trailer-icon">
+          </div>
           </div>
           <p class="films__title">${movie.title}</p>
           <div class="films__details">
