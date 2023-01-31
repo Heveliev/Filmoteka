@@ -1,9 +1,11 @@
 import {refs} from '../refs/refs';
 
-refs.filmCard.addEventListener("click", openModalFilm);
+refs.moviesList.addEventListener("click", openModalFilm);
 
 
 function openModalFilm(evt) {
+  if (evt.target !== evt.currentTarget) {
+   
   refs.backdrop.classList.remove("is-hidden");
   document.body.style.overflow = 'hidden';
 
@@ -17,6 +19,8 @@ function openModalFilm(evt) {
 
   document.addEventListener("click", closeModalFilm);
   window.addEventListener("keydown", closeModalFilm);
+    
+  }
 
 }
 
@@ -44,7 +48,7 @@ function renderModalFilm(film) {
               <td class="modal__first-column">Vote / Votes</td>
               <td>
                 <div class="modal__vote-wrapper">
-                  <p class="modal__vote">${film.vote_average}</p>
+                  <p class="modal__vote">${Math.round(film.vote_average * 10)/10}</p>
                   <p>/</p>
                   <p class="modal__votes">${film.vote_count}</p>
                 </div>
