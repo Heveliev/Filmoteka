@@ -12,7 +12,7 @@ export async function fetchTrendingMoviesInfo(currentPage = 1) {
 
 export async function fetchMoviesGenres() {
   const searchOptions = 'genre/movie/list';
-  const url = `${BASE_URL}${searchOptions}?${API_KEY}&language=en-US`;
+  const url = `${BASE_URL}${searchOptions}?api_key=${API_KEY}&language=en-US`;
 
   return axios.get(url).then(response => response.data);
 }
