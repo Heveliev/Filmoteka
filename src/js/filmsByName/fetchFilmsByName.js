@@ -2,24 +2,23 @@ import { getData } from "../getapi/getData";
 import { refs } from "../refs/refs";
 import { renderMoviesCards } from "../createMoviesMarkup/renderMoviesCards";
 import { renderTrendingPage, saveMoviesToLoсalStorage } from "../renderTrendigMovies/renderTrendingPage";
-import { handlerTrendingPagination, renderPagination } from "../createNumbPage.js/numbPage"
+import { renderPagination } from "../createNumbPage.js/numbPage"
 // import { renderPagination } from "../createNumbPage.js/numbPage"
 
 refs.form.addEventListener('submit', onSearchByName)
-let page = 1;
+let value;
 
 async function onSearchByName(e) {
     e.preventDefault();
-    const value = e.target.query.value.trim();
+    value = e.target.query.value.trim();
 
     if (!value) {
         return;
     }
 
-    const { results } = await getData(value, page);
-    page += 1; 
-    
-    if (!results.length) {
+    const data = await getData(value);
+        
+    if (!data.results.length) {
         refs.failureMassege.innerHTML = 'Search result not successful. Enter the correct movie name and try again.';
         setTimeout(() => {
             refs.failureMassege.innerHTML = ''
@@ -28,18 +27,18 @@ async function onSearchByName(e) {
         return;
     }
 
-    renderMoviesCards(results);
+    renderMoviesCards(data.results);
 
-    renderPagination(response.page, response.total_pages);
+    renderPagination(data.page, data.total_pages);
     refs.paginationBox.addEventListener('click', handlerTrendingPagination);
 
-    localStorage.setItem('saved-movies', JSON.stringify(results));
+    localStorage.setItem('saved-movies', JSON.stringify(data.results));
 }
 
 
 async function handlerTrendingPagination(evt) {
     function renderNewMoviesPage(pageNum) {
-        getData(pageNum).then(data => {
+        getData(value, pageNum).then(data => {
         renderMoviesCards(data.results);
         renderPagination(data.page, data.total_pages);
         saveMoviesToLoсalStorage(data.results);
