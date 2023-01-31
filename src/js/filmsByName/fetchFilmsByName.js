@@ -6,7 +6,7 @@ import { handlerTrendingPagination, renderPagination } from "../createNumbPage.j
 // import { renderPagination } from "../createNumbPage.js/numbPage"
 
 refs.form.addEventListener('submit', onSearchByName)
-
+let page = 1;
 
 async function onSearchByName(e) {
     e.preventDefault();
@@ -16,8 +16,9 @@ async function onSearchByName(e) {
         return;
     }
 
-    const { results } = await getData(value, 1);
-            
+    const { results } = await getData(value, page);
+    page += 1; 
+    
     if (!results.length) {
         refs.failureMassege.innerHTML = 'Search result not successful. Enter the correct movie name and try again.';
         setTimeout(() => {
@@ -29,43 +30,43 @@ async function onSearchByName(e) {
 
     renderMoviesCards(results);
 
-    // renderPagination(response.page, response.total_pages);
-    // refs.paginationBox.addEventListener('click', handlerTrendingPagination);
+    renderPagination(response.page, response.total_pages);
+    refs.paginationBox.addEventListener('click', handlerTrendingPagination);
 
     localStorage.setItem('saved-movies', JSON.stringify(results));
 }
 
 
-// export async function handlerTrendingPagination(evt) {
-//     function renderNewMoviesPage(pageNum) {
-//         getData(pageNum).then(data => {
-//         renderMoviesCards(data.results);
-//         renderPagination(data.page, data.total_pages);
-//         saveMoviesToLoсalStorage(data.results);
-//         });
-//     }
+async function handlerTrendingPagination(evt) {
+    function renderNewMoviesPage(pageNum) {
+        getData(pageNum).then(data => {
+        renderMoviesCards(data.results);
+        renderPagination(data.page, data.total_pages);
+        saveMoviesToLoсalStorage(data.results);
+        });
+    }
 
-//     if (evt.target.nodeName !== 'LI') {
-//         return;
-//     }
+    if (evt.target.nodeName !== 'LI') {
+        return;
+    }
 
-//     if (evt.target.textContent === '...') {
-//         return;
-//     }
+    if (evt.target.textContent === '...') {
+        return;
+    }
 
-//     if (evt.target.textContent === '🡸') {
-//         renderNewMoviesPage((globalCurrentPage -= 1));
-//         return;
-//     }
+    if (evt.target.textContent === '🡸') {
+        renderNewMoviesPage((globalCurrentPage -= 1));
+        return;
+    }
 
-//     if (evt.target.textContent === '🡺') {
-//         renderNewMoviesPage((globalCurrentPage += 1));
-//         return;
-//     }
+    if (evt.target.textContent === '🡺') {
+        renderNewMoviesPage((globalCurrentPage += 1));
+        return;
+    }
 
-//     const page = evt.target.textContent;
-//     renderNewMoviesPage(page);
-// }
+    const page = evt.target.textContent;
+    renderNewMoviesPage(page);
+}
 
 
 
