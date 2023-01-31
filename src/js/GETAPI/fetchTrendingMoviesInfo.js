@@ -1,11 +1,11 @@
 import axios from 'axios';
 
-const API_KEY = 'api_key=c939ec4794622751dcf7fba01c4a07e9';
+const API_KEY = 'c939ec4794622751dcf7fba01c4a07e9';
 const BASE_URL = 'https://api.themoviedb.org/3/';
 
 export async function fetchTrendingMoviesInfo(currentPage = 1) {
   const searchOptions = 'trending/movie/week';
-  const url = `${BASE_URL}${searchOptions}?${API_KEY}&page=${currentPage}`;
+  const url = `${BASE_URL}${searchOptions}?api_key=${API_KEY}&page=${currentPage}`;
 
   return axios.get(url).then(response => response.data);
 }
