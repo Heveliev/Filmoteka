@@ -17,8 +17,8 @@ export function renderPagination(currentPage, allPages) {
   globalCurrentPage = currentPage;
 
   if (currentPage > 1) {
-    markup += `<li class="page-number__item">&#129144;</li>`;
-    markup += `<li class="page-number__item">1</li>`;
+    markup += `<li class="page-number__item arrows">&#129144;</li>`;
+    markup += `<li class="page-number__item number">1</li>`;
   }
 
   if (currentPage > 4) {
@@ -26,21 +26,21 @@ export function renderPagination(currentPage, allPages) {
   }
 
   if (currentPage > 3) {
-    markup += `<li class="page-number__item">${beforeTwoPage}</li>`;
+    markup += `<li class="page-number__item number">${beforeTwoPage}</li>`;
   }
 
   if (currentPage > 2) {
-    markup += `<li class="page-number__item">${beforePage}</li>`;
+    markup += `<li class="page-number__item number">${beforePage}</li>`;
   }
 
-  markup += `<li class="page-number__item current_page"><b>${currentPage}</b></li>`;
+  markup += `<li class="page-number__item current_page number"><b>${currentPage}</b></li>`;
 
   if (allPages - 1 > currentPage) {
-    markup += `<li class="page-number__item">${afterPage}</li>`;
+    markup += `<li class="page-number__item number">${afterPage}</li>`;
   }
 
   if (allPages - 2 > currentPage) {
-    markup += `<li class="page-number__item">${afterTwoPage}</li>`;
+    markup += `<li class="page-number__item number">${afterTwoPage}</li>`;
   }
 
   if (allPages - 3 > currentPage) {
@@ -48,8 +48,8 @@ export function renderPagination(currentPage, allPages) {
   }
 
   if (allPages > currentPage) {
-    markup += `<li class="page-number__item">${allPages}</li>`;
-    markup += `<li class="page-number__item">&#129146;</li>`;
+    markup += `<li class="page-number__item number">${allPages}</li>`;
+    markup += `<li class="page-number__item arrows">&#129146;</li>`;
   }
 
   refs.paginationBox.innerHTML = markup;
