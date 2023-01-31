@@ -11,6 +11,7 @@ const refs = {
 
 refs.form.addEventListener('submit', onSearchByName)
 let value;
+let globalCurrentPage = 0;
 
 async function onSearchByName(e) {
     e.preventDefault();
