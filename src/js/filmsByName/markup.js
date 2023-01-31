@@ -1,8 +1,8 @@
 function createMarkup(arr = []) {
-    return arr.reduce((acc, {id, poster_path, title, genre_ids, release_date, vote_average}) => acc + `<li class="films__card" 
+        return arr.reduce((acc, {id, poster_path, title, genre_ids, release_date, vote_average}) => acc + `<li class="films__card" 
     data-id = ${id}>
         <a href="" class="films__link">
-        <img src="https://image.tmdb.org/t/p/w500/${poster_path}" alt="film poster" class="films__picture" />   
+            <img src="https://image.tmdb.org/t/p/w500/${poster_path}" alt="film poster" class="films__picture" />   
             <p class="films__title">${title}</p>
             <div class="films__details">
                 <p class="films__genres film-font-style">${genre_ids}</p>
