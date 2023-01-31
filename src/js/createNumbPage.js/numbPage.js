@@ -68,7 +68,7 @@ export async function handlerTrendingPagination(evt) {
       renderMoviesCards(data.results);
       scrollToTop();
       renderPagination(data.page, data.total_pages);
-      saveMoviesToLoсalStorage(data);
+      saveMoviesToLoсalStorage(data.results);
       hideLoadSpinner();
     });
   }
