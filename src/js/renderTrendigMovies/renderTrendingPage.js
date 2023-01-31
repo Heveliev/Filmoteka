@@ -1,7 +1,10 @@
 import { fetchTrendingMoviesInfo } from '../GETAPI/fetchTrendingMoviesInfo';
 import { renderMoviesCards } from '../createMoviesMarkup/renderMoviesCards';
 import { setMoviesGenres } from '../GETAPI/setMoviesGenres';
-import { saveMoviesToLoсalStorage } from '../common/common';
+import {
+  saveMoviesToLoсalStorage,
+  hidePageLoadSpinner,
+} from '../common/common';
 import {
   renderPagination,
   handlerTrendingPagination,
@@ -9,20 +12,28 @@ import {
 
 const refs = {
   paginationBox: document.querySelector('.page-number__list'),
+  moviesList: document.querySelector('.films__list'),
 };
 
 setMoviesGenres();
 
 export async function renderTrendingPage() {
-  const response = await fetchTrendingMoviesInfo();
-  const moviesObj = response.results;
+  try {
+    const data = await fetchTrendingMoviesInfo();
+    const moviesObj = data.results;
 
-  renderMoviesCards(moviesObj);
+    renderMoviesCards(moviesObj);
 
-  renderPagination(response.page, response.total_pages);
-  refs.paginationBox.addEventListener('click', handlerTrendingPagination);
+    renderPagination(data.page, data.total_pages);
+    refs.paginationBox.addEventListener('click', handlerTrendingPagination);
 
-  saveMoviesToLoсalStorage(moviesObj);
+    saveMoviesToLoсalStorage(moviesObj);
+  } catch (error) {
+    hidePageLoadSpinner();
+    console.log(error.toString());
+  } finally {
+    hidePageLoadSpinner();
+  }
 }
 
 renderTrendingPage();
