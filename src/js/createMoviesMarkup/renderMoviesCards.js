@@ -1,14 +1,19 @@
-import { refs } from '../refs/refs';
+const refs = {
+  moviesList: document.querySelector('.films__list'),
+};
 
 export function renderMoviesCards(moviesObjects) {
   return (refs.moviesList.innerHTML = moviesObjects
     .map(
-
       movie => `<li id='${movie.id}' class="films__card">
           <div class="films__overflow-wrapper">
             <img src="${checkPosterImg(
               movie.poster_path
             )}"  alt="film poster" class="films__picture" />
+            <div class="films__overlay">
+              <p class="films__trailer-text">Watch trailer</p>
+              <!-- <img src="" alt="test" class="films__trailer-icon"> -->
+            </div>
           </div>
           <p class="films__title">${movie.title}</p>
           <div class="films__details">
@@ -23,8 +28,6 @@ export function renderMoviesCards(moviesObjects) {
 }
 
 export function createMovieDetalisMarkup(movie) {
-  // console.log(movie.id);
-
   const savedGenres = localStorage.getItem('saved-genres');
   const genres = JSON.parse(savedGenres);
 
