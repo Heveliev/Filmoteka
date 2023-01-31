@@ -1,4 +1,4 @@
-refs = {
+const refs = {
   loader: document.querySelector('.loader'),
 };
 
