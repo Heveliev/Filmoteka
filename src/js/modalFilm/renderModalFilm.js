@@ -8,9 +8,7 @@ const refs = {
 refs.filmCard.addEventListener('click', openModalFilm);
 
 function openModalFilm(evt) {
-  const test = document.querySelector(".films__overlay");
-  const testTest = document.querySelector(".films__trailer-text");
-  if (evt.target !== evt.currentTarget && evt.target !== test && evt.target !== testTest) {
+  if (evt.target.nodeName === 'IMG') {
   refs.backdrop.classList.remove('is-hidden');
   document.body.style.overflow = 'hidden';
 
@@ -25,7 +23,6 @@ function openModalFilm(evt) {
   document.addEventListener('click', closeModalFilm);
   window.addEventListener('keydown', closeModalFilm);
   }
-
 }
 
 function closeModalFilm(evt) {
