@@ -1,4 +1,4 @@
-import { getData } from '../GETAPI/getData';
+import { getData } from '../getapi/getData';
 import { renderMoviesCards } from '../createMoviesMarkup/renderMoviesCards';
 import { renderTrendingPage } from '../renderTrendigMovies/renderTrendingPage';
 import {
