@@ -24,6 +24,5 @@
 //     const data = await GETAPI('trending/all/day')
 //     console.log(data)
 // }
-
-
+console.log('hi')
 // init()
