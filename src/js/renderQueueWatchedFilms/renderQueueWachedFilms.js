@@ -22,9 +22,11 @@ if (localStorage.getItem(QUEUE_KEY) === null) {
 
 let key = 'queue-films';
 queue.classList.add('current-page');
-try {
-  const resp = localStorage.getItem(key);
+const resp = localStorage.getItem(key);
 const parseResp = JSON.parse(resp);
+
+logo.addEventListener('click', removeLocalData);
+
 if (!parseResp.length) {
   fooError(key);
   hidePageLoadSpinner();
@@ -37,22 +39,13 @@ if (!parseResp.length) {
     hidePageLoadSpinner();
   }
 }
-} catch (error) {
-  throw new Error(error)
-}
 
-logo.removeEventListener('click', removeLocalData);
-logo.addEventListener('click', removeLocalData);
-
-
-btnList.removeEventListener('click', onBtnClick);
 btnList.addEventListener('click', onBtnClick);
 
 export function onBtnClick(e) {
   e.preventDefault();
-  
-  try {
-    key = e.target.id;
+  key = e.target.id;
+  console.dir(key);
   selectCurrentPage(key);
   const resp = localStorage.getItem(key);
   const parseResp = JSON.parse(resp);
@@ -65,10 +58,6 @@ export function onBtnClick(e) {
       fooError(key);
     }
   }
-  } catch (error) {
-    throw new Error(error);
-  }
-  
 }
 
 function fooError(key) {

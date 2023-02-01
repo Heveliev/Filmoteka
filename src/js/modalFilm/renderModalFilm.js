@@ -13,7 +13,6 @@ const librPage = document.querySelector("#js-libr");
 const queuePage = document.querySelector("#queue-films");
 const watchedPage = document.querySelector("#watched-films");
 
-refs.filmCard.removeEventListener('click', openModalFilm);
 refs.filmCard.addEventListener('click', openModalFilm);
 
 function openModalFilm(evt) {
@@ -22,18 +21,12 @@ function openModalFilm(evt) {
   document.body.style.overflow = 'hidden';
 
   const filmId = evt.target.closest('li').id;
-  try {
-    const filmArray = JSON.parse(localStorage.getItem('saved-movies'));
-    const filmOpened = filmArray.find(film => film.id === Number(filmId));
-    
-    renderModalFilm(filmOpened);
-    findGenres(filmOpened.genre_ids);
-    localStorageHandler(filmOpened);
-  } catch (error) {
-    throw new Error(error);
-  }
-  document.removeEventListener('click', closeModalFilm);
-  window.removeEventListener('keydown', closeModalFilm);
+  const filmArray = JSON.parse(localStorage.getItem('saved-movies'));
+  const filmOpened = filmArray.find(film => film.id === Number(filmId));
+  
+  renderModalFilm(filmOpened);
+  findGenres(filmOpened.genre_ids);
+  localStorageHandler(filmOpened);
 
   document.addEventListener('click', closeModalFilm);
   window.addEventListener('keydown', closeModalFilm);
@@ -110,12 +103,8 @@ function clearModalFilm() {
 }
 
 function findGenres(filmGenreIds) {
-  try {
-    const savedGenres = JSON.parse(localStorage.getItem('saved-genres'));
-    return filmGenreIds.map(genreId => savedGenres[genreId]).join(`, `);
-  } catch (error) {
-    throw new Error(error);
-  }
+  const savedGenres = JSON.parse(localStorage.getItem('saved-genres'));
+  return filmGenreIds.map(genreId => savedGenres[genreId]).join(`, `);
 }
 
 function localStorageHandler(film) {
@@ -124,14 +113,12 @@ function localStorageHandler(film) {
 
   const WATCHED_KEY = 'watched-films';
   const QUEUE_KEY = 'queue-films';
-  toWatchedBtn.removeEventListener('click', addToWatched);
-  queueBtn.removeEventListener('click', addToQueue);
+
   toWatchedBtn.addEventListener('click', addToWatched);
   queueBtn.addEventListener('click', addToQueue);
 
   function addToWatched() {
-    try {
-      let watchedData = JSON.parse(localStorage.getItem('watched-films')) || [];
+    let watchedData = JSON.parse(localStorage.getItem('watched-films')) || [];
     if (!watchedData.find(item => item.id === film.id)) {
       watchedData.push(film);
     } else {
@@ -142,15 +129,11 @@ function localStorageHandler(film) {
     if (librPage.classList.contains("current") && watchedPage.classList.contains("current-page")) {
       renderMoviesCards(watchedData);
     }
-    } catch (error) {
-      throw new Error(error)
-    }
-    
+
   }
 
   function addToQueue() {
-    try {
-      let queueData = JSON.parse(localStorage.getItem('queue-films')) || [];
+    let queueData = JSON.parse(localStorage.getItem('queue-films')) || [];
     if (!queueData.find(item => item.id === film.id)) {
       queueData.push(film);
     } else {
@@ -161,33 +144,19 @@ function localStorageHandler(film) {
         if (librPage.classList.contains("current") && queuePage.classList.contains("current-page")) {
       renderMoviesCards(queueData);
     }
-    } catch (error) {
-      throw new Error(error)
-    }
-    
   }
 }
 
 function getWatchActionText(film) {
-  try {
-    let watchedData = JSON.parse(localStorage.getItem('watched-films')) || [];
+  let watchedData = JSON.parse(localStorage.getItem('watched-films')) || [];
   return watchedData.find(item => item.id === film.id)
     ? 'REMOVE FROM WATCHED'
     : 'ADD TO WATCHED';
-  } catch (error) {
-    throw new Error(error)
-  }
-  
 }
 
 function getQueueActiontext(film) {
-  try {
-    let queueData = JSON.parse(localStorage.getItem('queue-films')) || [];
+  let queueData = JSON.parse(localStorage.getItem('queue-films')) || [];
   return queueData.find(item => item.id === film.id)
     ? 'REMOVE FROM QUEUE'
     : 'ADD TO QUEUE';
-  } catch (error) {
-    throw new Error(error)
-  }
-  
 }

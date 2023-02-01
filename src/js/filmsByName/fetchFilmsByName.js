@@ -14,7 +14,7 @@ const refs = {
   failureMassege: document.querySelector('.js-failure-massege'),
   paginationBox: document.querySelector('.page-number__list'),
 };
-refs.form.removeEventListener('submit', onSearchByName);
+
 refs.form.addEventListener('submit', onSearchByName);
 let value;
 let globalCurrentPage = 0;

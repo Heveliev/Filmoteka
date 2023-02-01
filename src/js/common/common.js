@@ -15,13 +15,9 @@ export function setLocalData(data) {
 }
 
 export function getLocalData() {
-  try {
-    const data = JSON.parse(localStorage.getItem(DATA_KEY));
-    return data;
-  } catch (error) {
-    throw new Error(error);
-  }
- 
+ const data = JSON.parse(localStorage.getItem(DATA_KEY));
+
+  return data;
 }
 
 export function removeLocalData() {
