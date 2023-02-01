@@ -79,3 +79,4 @@ renderTrendingPage();
 //     hidePageLoadSpinner();
 //   }
 // }
+console.log('hi')
