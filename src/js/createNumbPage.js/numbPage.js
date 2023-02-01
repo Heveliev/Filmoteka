@@ -5,6 +5,7 @@ import {
   scrollToTop,
   showLoadSpinner,
   hideLoadSpinner,
+  setLocalData,
 } from '../common/common';
 
 const refs = {
@@ -69,7 +70,9 @@ export async function handlerTrendingPagination(evt) {
       scrollToTop();
       renderPagination(data.page, data.total_pages);
       saveMoviesToLoсalStorage(data.results);
+      setLocalData(data);
       hideLoadSpinner();
+      console.log('Пагінація');
     });
   }
 

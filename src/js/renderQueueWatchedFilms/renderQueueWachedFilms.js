@@ -1,15 +1,18 @@
 import { renderMoviesCards } from '../createMoviesMarkup/renderMoviesCards';
-import { hidePageLoadSpinner } from '../common/common';
+import { hidePageLoadSpinner, onLogoClick } from '../common/common';
 
 const watched = document.querySelector('.watched-films');
 const queue = document.querySelector('.queue-films');
 const btnList = document.querySelector('.button-list');
 const librList = document.querySelector('.films__list');
+const logo = document.querySelector('.logo-link');
 
 let key = 'queue-films';
 queue.classList.add('current-page');
 const resp = localStorage.getItem(key);
 const parseResp = JSON.parse(resp);
+
+logo.addEventListener('click', onLogoClick);
 
 if (!parseResp.length) {
   fooError(key);

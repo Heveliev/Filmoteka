@@ -1,45 +1,59 @@
-import { getData } from "../getapi/getData";
-import { renderMoviesCards } from "../createMoviesMarkup/renderMoviesCards";
-import { renderTrendingPage } from "../renderTrendigMovies/renderTrendingPage";
-import { saveMoviesToLoсalStorage} from "../common/common";
-// import { renderPagination } from "../createNumbPage.js/numbPage";
+import { getData } from '../getapi/getData';
+import { renderMoviesCards } from '../createMoviesMarkup/renderMoviesCards';
+import { renderTrendingPage } from '../renderTrendigMovies/renderTrendingPage';
+import {
+  saveMoviesToLoсalStorage,
+  removeLocalData,
+  showLoadSpinner,
+  hideLoadSpinner,
+  scrollToTop,
+} from '../common/common';
+import { handlerTrendingPagination } from '../createNumbPage.js/numbPage';
 const refs = {
-    form: document.querySelector('.header-form'),
-    failureMassege: document.querySelector('.js-failure-massege'),
-    paginationBox: document.querySelector('.page-number__list'),
-  };
+  form: document.querySelector('.header-form'),
+  failureMassege: document.querySelector('.js-failure-massege'),
+  paginationBox: document.querySelector('.page-number__list'),
+};
 
-refs.form.addEventListener('submit', onSearchByName)
+refs.form.addEventListener('submit', onSearchByName);
 let value;
 let globalCurrentPage = 0;
 
 async function onSearchByName(e) {
-    e.preventDefault();
-    value = e.target.query.value.trim();
+  e.preventDefault();
+  value = e.target.query.value.trim();
 
-    if (!value) {
-        return;
-    }
+  if (!value) {
+    return;
+  }
 
-    const data = await getData(value);
-        
-    if (!data.results.length) {
-        refs.failureMassege.innerHTML = 'Search result not successful. Enter the correct movie name and try again.';
-        setTimeout(() => {
-            refs.failureMassege.innerHTML = ''
-        }, 2000);
-        renderTrendingPage();
-        return;
-    }
+  showLoadSpinner();
+  const data = await getData(value);
 
-    renderMoviesCards(data.results);
+  if (!data.results.length) {
+    refs.failureMassege.innerHTML =
+      'Search result not successful. Enter the correct movie name and try again.';
+    setTimeout(() => {
+      refs.failureMassege.innerHTML = '';
+    }, 2000);
+    renderTrendingPage();
+    hideLoadSpinner();
+    return;
+  }
 
-    renderPagination(data.page, data.total_pages);
-    refs.paginationBox.addEventListener('click', handlerTrendingPagination);
+  removeLocalData();
 
-    localStorage.setItem('saved-movies', JSON.stringify(data.results));
+  renderMoviesCards(data.results);
+  renderSearchPagination(data.page, data.total_pages);
+  refs.paginationBox.removeEventListener('click', handlerTrendingPagination);
+  refs.paginationBox.addEventListener('click', handlerSearchPagination);
+
+  hideLoadSpinner();
+
+  localStorage.setItem('saved-movies', JSON.stringify(data.results));
 }
-function renderPagination(currentPage, allPages) {
+
+function renderSearchPagination(currentPage, allPages) {
   let markup = '';
   let beforeTwoPage = currentPage - 2;
   let beforePage = currentPage - 1;
@@ -86,38 +100,39 @@ function renderPagination(currentPage, allPages) {
   refs.paginationBox.innerHTML = markup;
 }
 
-async function handlerTrendingPagination(evt) {
-    function renderNewMoviesPage(pageNum) {
-        getData(value, pageNum).then(data => {
-        renderMoviesCards(data.results);
-        renderPagination(data.page, data.total_pages);
-        saveMoviesToLoсalStorage(data.results);
-        });
-    }
+export async function handlerSearchPagination(evt) {
+  function renderNewSearchPage(pageNum) {
+    showLoadSpinner();
+    getData(value, pageNum).then(data => {
+      renderMoviesCards(data.results);
+      scrollToTop();
+      renderSearchPagination(data.page, data.total_pages);
+      saveMoviesToLoсalStorage(data.results);
+      hideLoadSpinner();
+      console.log('Пагінація 2');
+    });
+  }
 
-    if (evt.target.nodeName !== 'LI') {
-        return;
-    }
+  if (evt.target.nodeName !== 'LI') {
+    return;
+  }
 
-    if (evt.target.textContent === '...') {
-        return;
-    }
+  if (evt.target.textContent === '...') {
+    return;
+  }
 
-    if (evt.target.textContent === '🡸') {
-        renderNewMoviesPage((globalCurrentPage -= 1));
-        return;
-    }
+  if (evt.target.textContent === '🡸') {
+    renderNewSearchPage((globalCurrentPage -= 1));
+    return;
+  }
 
-    if (evt.target.textContent === '🡺') {
-        renderNewMoviesPage((globalCurrentPage += 1));
-        return;
-    }
+  if (evt.target.textContent === '🡺') {
+    renderNewSearchPage((globalCurrentPage += 1));
+    return;
+  }
 
-    const page = evt.target.textContent;
-    renderNewMoviesPage(page);
+  const page = evt.target.textContent;
+  renderNewSearchPage(page);
 }
 
-
-
-
-  export {onSearchByName};
+export { onSearchByName };
