@@ -72,7 +72,6 @@ export async function handlerTrendingPagination(evt) {
       saveMoviesToLoсalStorage(data.results);
       setLocalData(data);
       hideLoadSpinner();
-      console.log('Пагінація');
     });
   }
 

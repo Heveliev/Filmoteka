@@ -21,7 +21,7 @@ const refs = {
 };
 
 setMoviesGenres();
-
+refs.logo.removeEventListener('click', removeLocalData);
 refs.logo.addEventListener('click', removeLocalData);
 
 export async function renderTrendingPage() {
@@ -79,4 +79,3 @@ renderTrendingPage();
 //     hidePageLoadSpinner();
 //   }
 // }
-console.log('hi')
