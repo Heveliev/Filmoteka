@@ -15,7 +15,7 @@ export function setLocalData(data) {
 }
 
 export function getLocalData() {
-  data = JSON.parse(localStorage.getItem(DATA_KEY));
+ const data = JSON.parse(localStorage.getItem(DATA_KEY));
 
   return data;
 }
