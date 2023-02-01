@@ -12,7 +12,7 @@ queue.classList.add('current-page');
 const resp = localStorage.getItem(key);
 const parseResp = JSON.parse(resp);
 
-logo.addEventListener('click', onLogoClick);
+// logo.addEventListener('click', onLogoClick);
 
 if (!parseResp.length) {
   fooError(key);
