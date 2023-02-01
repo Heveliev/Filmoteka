@@ -1,6 +1,6 @@
 import { fetchTrendingMoviesInfo } from '../GETAPI/fetchTrendingMoviesInfo';
 import { renderMoviesCards } from '../createMoviesMarkup/renderMoviesCards';
-import { setMoviesGenres } from '../GETAPI/setMoviesGenres';
+import { setMoviesGenres } from '../genres/setMovieGenres';
 import {
   saveMoviesToLoсalStorage,
   hidePageLoadSpinner,

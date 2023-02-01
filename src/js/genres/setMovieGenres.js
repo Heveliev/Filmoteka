@@ -1,4 +1,4 @@
-import { fetchMoviesGenres } from './fetchTrendingMoviesInfo';
+import { fetchMoviesGenres } from '../getapi/fetchTrendingMoviesInfo';
 
 export async function setMoviesGenres() {
   const GENRES_KEY = 'saved-genres';

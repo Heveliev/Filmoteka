@@ -28,37 +28,44 @@ export function renderMoviesCards(moviesObjects) {
 }
 
 export function createMovieDetalisMarkup(movie) {
-  const savedGenres = localStorage.getItem('saved-genres');
-  const genres = JSON.parse(savedGenres);
 
-  let movieGenres = [];
-  const movieReleaseYear = movie.release_date.slice(0, 4);
-
-  for (let i = 0; i < movie.genre_ids.length; i++) {
-    movieGenres.push(genres[movie.genre_ids[i]]);
+  try {
+   const savedGenres = localStorage.getItem('saved-genres');
+   const genres = JSON.parse(savedGenres);
+   let movieGenres = [];
+   const movieReleaseYear = movie.release_date.slice(0, 4);
+ 
+   for (let i = 0; i < movie.genre_ids.length; i++) {
+     movieGenres.push(genres[movie.genre_ids[i]]);
+   }
+ 
+   let moviesGenresMarkup = '';
+ 
+   if (movieGenres.length > 2) {
+     moviesGenresMarkup = movieGenres.splice(0, 2).join(', ') + ', Other';
+   } else {
+     moviesGenresMarkup = movieGenres.join(', ');
+   }
+ 
+   if (movie.genre_ids.length === 0 && !movie.release_date) {
+     return '';
+   }
+ 
+   if (movie.genre_ids.length === 0 && movie.release_date) {
+     return movieReleaseYear;
+   }
+ 
+   if (movie.genre_ids.length !== 0 && !movie.release_date) {
+     return moviesGenresMarkup;
+   }
+ 
+   return moviesGenresMarkup + ' | ' + movieReleaseYear;
+  } catch (error) {
+    throw new Error(error)
   }
 
-  let moviesGenresMarkup = '';
 
-  if (movieGenres.length > 2) {
-    moviesGenresMarkup = movieGenres.splice(0, 2).join(', ') + ', Other';
-  } else {
-    moviesGenresMarkup = movieGenres.join(', ');
-  }
 
-  if (movie.genre_ids.length === 0 && !movie.release_date) {
-    return '';
-  }
-
-  if (movie.genre_ids.length === 0 && movie.release_date) {
-    return movieReleaseYear;
-  }
-
-  if (movie.genre_ids.length !== 0 && !movie.release_date) {
-    return moviesGenresMarkup;
-  }
-
-  return moviesGenresMarkup + ' | ' + movieReleaseYear;
 }
 
 function checkPosterImg(posterPath) {
