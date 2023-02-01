@@ -11,4 +11,3 @@ const refs = {
   closeBtn: document.querySelector('.modal__close-btn'),
   filmRendering: document.querySelector('.film-render-markup'),
 };
- 
