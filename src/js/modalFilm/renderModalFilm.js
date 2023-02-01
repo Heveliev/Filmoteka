@@ -16,7 +16,7 @@ refs.filmCard.removeEventListener('click', openModalFilm);
 refs.filmCard.addEventListener('click', openModalFilm);
 
 function openModalFilm(evt) {
-  if (evt.target.nodeName === 'IMG') {
+  if (evt.target.nodeName === 'IMG' && evt.target.classList.contains("films__picture")) {
   refs.backdrop.classList.remove('is-hidden');
   document.body.style.overflow = 'hidden';
 
