@@ -16,4 +16,3 @@ export async function fetchMoviesGenres() {
 
   return axios.get(url).then(response => response.data);
 }
-console.log('fix')
