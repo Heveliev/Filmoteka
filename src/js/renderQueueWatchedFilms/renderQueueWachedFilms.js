@@ -7,19 +7,6 @@ const btnList = document.querySelector('.button-list');
 const librList = document.querySelector('.films__list');
 const logo = document.querySelector('.logo-link');
 
-const WATCHED_KEY = 'watched-films';
-const QUEUE_KEY = 'queue-films';
-
-if (localStorage.getItem(WATCHED_KEY) === null) {
-  localStorage.setItem(WATCHED_KEY, JSON.stringify([]));
-  hidePageLoadSpinner();
-}
-
-if (localStorage.getItem(QUEUE_KEY) === null) {
-  localStorage.setItem(QUEUE_KEY, JSON.stringify([]));
-  hidePageLoadSpinner();
-}
-
 let key = 'queue-films';
 queue.classList.add('current-page');
 const resp = localStorage.getItem(key);
@@ -63,7 +50,7 @@ export function onBtnClick(e) {
 function fooError(key) {
   return (librList.innerHTML = `
   <img src="https://kartinkof.club/uploads/posts/2022-03/1648361803_4-kartinkof-club-p-mem-obezyana-smotrit-v-storonu-5.jpg" alt="monkey" width="400" height="200">
-  <p>Opss... you haven't added any movies to (${key})</p>
+  <p>Opss... you haven't added any movies to ${key}</p>
 `);
 }
 
