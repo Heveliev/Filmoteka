@@ -1,4 +1,4 @@
-import { fetchMoviesGenres } from './fetchTrendingMoviesInfo';
+import { fetchMoviesGenres } from "./fetchTrendingMoviesInfo";
 
 export async function setMoviesGenres() {
   const GENRES_KEY = 'saved-genres';
@@ -7,18 +7,12 @@ export async function setMoviesGenres() {
   if (localStorage.getItem(GENRES_KEY)) {
     return;
   } else {
-    try {
         const response = await fetchMoviesGenres();
-
-    for (const genre of response.genres) {
+    for(const genre of response.genres) {
       const { id, name } = genre;
       genres[id] = name;
     }
-
     localStorage.setItem(GENRES_KEY, JSON.stringify(genres));
-    } catch (error) {
-        throw new Error(error)
-    }
     
   }
 };
