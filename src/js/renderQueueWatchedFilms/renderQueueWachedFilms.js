@@ -28,12 +28,11 @@ if (localStorage.getItem(QUEUE_KEY) === null) {
 }
 
 let key = 'queue-films';
+
 queue.classList.add('current-page');
-const resp = localStorage.getItem(key);
+try {
+  const resp = localStorage.getItem(key);
 let parseResp = JSON.parse(resp);
-
-logo.addEventListener('click', removeLocalData);
-
 if (!parseResp.length) {
   fooError(key);
   hidePageLoadSpinner();
@@ -55,15 +54,23 @@ if (!parseResp.length) {
     hidePageLoadSpinner();
   }
 }
+} catch (error) {
+  throw new Error(error);
+}
 
+logo.removeEventListener('click', removeLocalData);
+logo.addEventListener('click', removeLocalData);
+
+
+btnList.removeEventListener('click', onBtnClick);
 btnList.addEventListener('click', onBtnClick);
 
 export function onBtnClick(e) {
   e.preventDefault();
   key = e.target.id;
-  console.dir(key);
   selectCurrentPage(key);
-  const resp = localStorage.getItem(key);
+  try {
+    const resp = localStorage.getItem(key);
   parseResp = JSON.parse(resp);
 
   if (!parseResp.length) {
@@ -84,6 +91,10 @@ export function onBtnClick(e) {
       hidePageLoadSpinner();
     }
   }
+  } catch (error) {
+    throw new Error(error)
+  }
+  
 }
 
 function fooError(key) {
@@ -137,8 +148,7 @@ function handlerLibraryPagination(evt) {
     renderMoviesCards(data.results);
     scrollToTop();
     renderLibraryPagination(data.page, data.total_pages);
-    hideLoadSpinner();
-    console.log(pageNum);
+
   }
   if (evt.target.nodeName !== 'LI') {
     return;
