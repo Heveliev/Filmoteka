@@ -1,4 +1,4 @@
-function hideScrollUpBtn() {
+const hideScrollUpBtn = () => {
     let scroll = window.pageYOffset;
   
     const scrollUpButton = document.querySelector('.scroll-up-btn');
@@ -9,6 +9,6 @@ function hideScrollUpBtn() {
     }
     scrollUpButton.blur();
     scrollUpButton.classList.add('scroll-up-btn--hidden');
-  }
-  
-  window.addEventListener('scroll', hideScrollUpBtn);
+  };
+
+window.addEventListener('scroll', hideScrollUpBtn);
