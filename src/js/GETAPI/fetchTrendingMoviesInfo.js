@@ -20,9 +20,9 @@ export async function fetchMoviesGenres() {
   const url = `${BASE_URL}${searchOptions}?api_key=${API_KEY}&language=en-US`;
 try {
  const genr = await axios.get(url);
- return genr.data
+
+ return genr.data;
 } catch (error) {
   throw new Error(error);
 }
-
 }

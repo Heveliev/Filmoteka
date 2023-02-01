@@ -7,7 +7,8 @@ export async function setMoviesGenres() {
   if (localStorage.getItem(GENRES_KEY)) {
     return;
   } else {
-    const response = await fetchMoviesGenres();
+    try {
+        const response = await fetchMoviesGenres();
 
     for (const genre of response.genres) {
       const { id, name } = genre;
@@ -15,5 +16,9 @@ export async function setMoviesGenres() {
     }
 
     localStorage.setItem(GENRES_KEY, JSON.stringify(genres));
+    } catch (error) {
+        throw new Error(error)
+    }
+    
   }
 }
