@@ -13,7 +13,8 @@ let parseResp;
 const watched = document.querySelector('.watched-films');
 const queue = document.querySelector('.queue-films');
 const btnList = document.querySelector('.button-list');
-const librList = document.querySelector('.js-no_films__list');
+const librNoFilm = document.querySelector('.js-no_films__list');
+const librList = document.querySelector('.films__list');
 const logo = document.querySelector('.logo-link');
 const paginationBox = document.querySelector('.page-number__list');
 
@@ -37,6 +38,7 @@ try {
   const resp = localStorage.getItem(key);
  parseResp = JSON.parse(resp);
 if (!parseResp.length) {
+  clearList();
   clearPagination();
   fooError(key);
   hidePageLoadSpinner();
@@ -56,6 +58,7 @@ if (!parseResp.length) {
 
 
   } catch (error) {
+    clearList();
     clearPagination();
     fooError(key);
     hidePageLoadSpinner();
@@ -81,6 +84,7 @@ export function onBtnClick(e) {
   parseResp = JSON.parse(resp);
 
   if (!parseResp.length) {
+    clearList();
     clearPagination();
     fooError(key);
   } else {
@@ -94,6 +98,7 @@ export function onBtnClick(e) {
 
       hidePageLoadSpinner();
     } catch (error) {
+      clearList();
       clearPagination();
       fooError(key);
       hidePageLoadSpinner();
@@ -107,8 +112,11 @@ export function onBtnClick(e) {
 function clearPagination(){
   paginationBox.innerHTML = '';
 }
+function clearList() {
+  librList.innerHTML = '';
+}
 function fooError(key) {
-  return (librList.innerHTML = `
+  return (librNoFilm.innerHTML = `
   <img src="https://kartinkof.club/uploads/posts/2022-03/1648361803_4-kartinkof-club-p-mem-obezyana-smotrit-v-storonu-5.jpg" alt="monkey" width="400" height="200">
   <p class="js-no_films__text">Opss... you haven't added any movies to (${key})</p>
 `);
