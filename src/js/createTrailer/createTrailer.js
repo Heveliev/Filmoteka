@@ -6,7 +6,7 @@ const API_URL = 'https://api.themoviedb.org/3/';
 
 const galleryItemsOverlay = document.querySelector('.films__list');
 const body = document.body;
-
+galleryItemsOverlay.removeEventListener('click', onGalleryItemsClick);
 galleryItemsOverlay.addEventListener('click', onGalleryItemsClick);
 
 function onGalleryItemsClick(e) {
@@ -84,6 +84,7 @@ function filmCloseTrailer(instance) {
   const trailerCloseBtn = document.querySelector(
     '[data-action="close-lightbox"]'
   );
+  trailerCloseBtn.removeEventListener('click', onCloseTrailer);
   trailerCloseBtn.addEventListener('click', onCloseTrailer);
 
   function onCloseTrailer(e) {
@@ -99,6 +100,4 @@ const checkPressKey = (event, instance) => {
     );
   }
 };
-// galleryItemsOverlay: document.querySelector('.films__overlay'),
 
-/* <script type="module" src="./js/createTrailer/createTrailer.js"></script> */

@@ -28,7 +28,8 @@ export function renderMoviesCards(moviesObjects) {
 }
 
 export function createMovieDetalisMarkup(movie) {
-  const savedGenres = localStorage.getItem('saved-genres');
+  try {
+    const savedGenres = localStorage.getItem('saved-genres');
   const genres = JSON.parse(savedGenres);
 
   let movieGenres = [];
@@ -59,6 +60,10 @@ export function createMovieDetalisMarkup(movie) {
   }
 
   return moviesGenresMarkup + ' | ' + movieReleaseYear;
+  } catch (error) {
+    throw new Error(error)
+  }
+  
 }
 
 function checkPosterImg(posterPath) {
