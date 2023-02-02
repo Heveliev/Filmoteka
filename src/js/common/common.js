@@ -49,3 +49,4 @@ export function hidePageLoadSpinner() {
   refs.loader.classList.remove('page-load');
   refs.loader.classList.add('hide');
 }
+
