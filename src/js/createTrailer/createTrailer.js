@@ -10,7 +10,6 @@ galleryItemsOverlay.removeEventListener('click', onGalleryItemsClick);
 galleryItemsOverlay.addEventListener('click', onGalleryItemsClick);
 
 function onGalleryItemsClick(e) {
-  // console.log(e.target.className);
   if (
     e.target.className !== 'films__overlay' &&
     e.target.className !== 'films__trailer-text'
@@ -32,10 +31,7 @@ function openVideoTrailer(id) {
   fetch(url)
     .then(response => response.json())
     .then(data => {
-      console.log(data.results[0].key + ' : Youtube key');
       const idFilm = data.results[0].key;
-      // const instance = basicLightbox.create(`<iframe src="https://www.youtube.com/embed/${id}" width="560" height="315" frameborder="0"></iframe>`);
-
       const instance = basicLightbox.create(
         `<iframe width="80%" height="80%" src='https://www.youtube.com/embed/${idFilm}'frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`,
         {
@@ -54,14 +50,11 @@ function openVideoTrailer(id) {
       filmCloseTrailer(instance);
     })
     .catch(() => {
-      console.log('Catch Error!');
       const instance = basicLightbox.create(
         `
             <iframe width="0%" height="0%" src='' frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             // `,
         {
-          //     onShow: (instance) => { body.style.overflow = 'hidden'; },
-          //     onClose: (instance) => { body.style.overflow = 'inherit'; }
         }
       );
       instance.show();

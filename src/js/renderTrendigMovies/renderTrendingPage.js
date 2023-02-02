@@ -36,7 +36,6 @@ export async function renderTrendingPage() {
       setLocalData(data);
     } catch (error) {
       hidePageLoadSpinner();
-      console.log(error.toString());
     }
   }
 
@@ -51,31 +50,3 @@ export async function renderTrendingPage() {
 
 renderTrendingPage();
 
-// if (getLocalData()) {
-//   data = getLocalData();
-
-//   saveMoviesToLoсalStorage(data.results);
-//   setLocalData(data);
-//   hidePageLoadSpinner();
-// } else {
-//   renderTrendingPage();
-// }
-
-// export async function renderTrendingPage() {
-//   try {
-//     const data = await fetchTrendingMoviesInfo();
-
-//     renderMoviesCards(data.results);
-//     renderPagination(data.page, data.total_pages);
-//     refs.paginationBox.removeEventListener('click', handlerSearchPagination);
-//     refs.paginationBox.addEventListener('click', handlerTrendingPagination);
-
-//     saveMoviesToLoсalStorage(data.results);
-//     setLocalData(data);
-//   } catch (error) {
-//     hidePageLoadSpinner();
-//     console.log(error.toString());
-//   } finally {
-//     hidePageLoadSpinner();
-//   }
-// }

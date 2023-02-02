@@ -24,5 +24,5 @@ export async function fetchMoviesGenres() {
   } catch (error) {
     throw new Error(error)
   }
-  // return axios.get(url).then(response => response.data);
+
 }

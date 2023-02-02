@@ -109,7 +109,6 @@ export async function handlerSearchPagination(evt) {
       renderSearchPagination(data.page, data.total_pages);
       saveMoviesToLoсalStorage(data.results);
       hideLoadSpinner();
-      console.log('Пагінація 2');
     });
   }
 

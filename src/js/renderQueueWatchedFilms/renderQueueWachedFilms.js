@@ -9,7 +9,7 @@ import {
   scrollToTop,
 } from '../common/common';
 let globalCurrentPage = 0;
-
+let parseResp;
 const watched = document.querySelector('.watched-films');
 const queue = document.querySelector('.queue-films');
 const btnList = document.querySelector('.button-list');
@@ -35,7 +35,7 @@ let key = 'queue-films';
 queue.classList.add('current-page');
 try {
   const resp = localStorage.getItem(key);
-let parseResp = JSON.parse(resp);
+ parseResp = JSON.parse(resp);
 if (!parseResp.length) {
   fooError(key);
   hidePageLoadSpinner();
@@ -43,7 +43,6 @@ if (!parseResp.length) {
   try {
     const data = createDataToRender(parseResp);
 
-    console.log(data.results);
 
     renderMoviesCards(data.results);
     renderLibraryPagination(data.page, data.totalPages);
@@ -52,6 +51,9 @@ if (!parseResp.length) {
     paginationBox.addEventListener('click', handlerLibraryPagination);
 
     hidePageLoadSpinner();
+
+
+
   } catch (error) {
     fooError(key);
     hidePageLoadSpinner();
@@ -81,7 +83,6 @@ export function onBtnClick(e) {
   } else {
     try {
       const data = createDataToRender(parseResp);
-      console.log(data.results);
       renderMoviesCards(data.results);
       renderLibraryPagination(data.page, data.totalPages);
 
@@ -147,7 +148,6 @@ function handlerLibraryPagination(evt) {
   function renderNewMoviesPage(pageNum) {
     showLoadSpinner();
     const data = createDataToRender(parseResp, pageNum);
-    console.log(data.results);
     renderMoviesCards(data.results);
     scrollToTop();
     renderLibraryPagination(data.page, data.total_pages);

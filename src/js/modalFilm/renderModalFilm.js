@@ -6,7 +6,6 @@ const refs = {
   filmCard: document.querySelector('.films__list'),
   backdrop: document.querySelector('.backdrop-modal-film'),
   filmRendering: document.querySelector('.film-render-markup'),
-  // librPage: document.querySelector('.js-libr'),
 };
 
 const librPage = document.querySelector("#js-libr");
