@@ -155,6 +155,7 @@ function handlerLibraryPagination(evt) {
     showLoadSpinner();
     const data = createDataToRender(parseResp, pageNum);
     renderMoviesCards(data.results);
+    hideLoadSpinner();
     scrollToTop();
     renderLibraryPagination(data.page, data.total_pages);
 
