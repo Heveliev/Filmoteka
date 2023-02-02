@@ -37,6 +37,7 @@ try {
   const resp = localStorage.getItem(key);
  parseResp = JSON.parse(resp);
 if (!parseResp.length) {
+  clearPagination();
   fooError(key);
   hidePageLoadSpinner();
 } else {
@@ -55,6 +56,7 @@ if (!parseResp.length) {
 
 
   } catch (error) {
+    clearPagination();
     fooError(key);
     hidePageLoadSpinner();
   }
@@ -79,6 +81,7 @@ export function onBtnClick(e) {
   parseResp = JSON.parse(resp);
 
   if (!parseResp.length) {
+    clearPagination();
     fooError(key);
   } else {
     try {
@@ -91,6 +94,7 @@ export function onBtnClick(e) {
 
       hidePageLoadSpinner();
     } catch (error) {
+      clearPagination();
       fooError(key);
       hidePageLoadSpinner();
     }
@@ -100,7 +104,9 @@ export function onBtnClick(e) {
   }
   
 }
-
+function clearPagination(){
+  paginationBox.innerHTML = '';
+}
 function fooError(key) {
   return (librList.innerHTML = `
   <img src="https://kartinkof.club/uploads/posts/2022-03/1648361803_4-kartinkof-club-p-mem-obezyana-smotrit-v-storonu-5.jpg" alt="monkey" width="400" height="200">
