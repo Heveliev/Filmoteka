@@ -170,7 +170,7 @@ function handlerLibraryPagination(evt) {
     renderMoviesCards(data.results);
     hideLoadSpinner();
     scrollToTop();
-    renderLibraryPagination(data.page, data.total_pages);
+    renderLibraryPagination(data.page, data.totalPages);
 
   }
   if (evt.target.nodeName !== 'LI') {
