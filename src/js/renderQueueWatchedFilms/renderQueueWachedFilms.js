@@ -1,4 +1,6 @@
 import { renderMoviesCards } from '../createMoviesMarkup/renderMoviesCards';
+
+import { hidePageLoadSpinner, removeLocalData } from '../common/common';
 import {
   hidePageLoadSpinner,
   removeLocalData,
@@ -7,6 +9,7 @@ import {
   scrollToTop,
 } from '../common/common';
 let globalCurrentPage = 0;
+
 const watched = document.querySelector('.watched-films');
 const queue = document.querySelector('.queue-films');
 const btnList = document.querySelector('.button-list');

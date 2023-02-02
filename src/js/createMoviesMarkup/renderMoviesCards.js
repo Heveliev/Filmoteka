@@ -15,12 +15,12 @@ export function renderMoviesCards(moviesObjects) {
                 <img scr alt class="films__trailer-icon">
               </div>
             </div>
-            <p class="films__title">${movie.title}</p>
             <div class="films__details">
+              <p class="films__title">${movie.title}</p>
               <p class="films__genres film-font-style">${createMovieDetalisMarkup(
-                movie
-              )}</p>
-              <span class="films__rate">${movie.vote_average.toFixed(1)}</span>
+                movie)}
+                <span class="films__rate">${movie.vote_average.toFixed(1)}</span>
+              </p>
             </div>
           </li>`
     )
