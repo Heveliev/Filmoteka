@@ -14,7 +14,6 @@ function onGalleryItemsClick(e) {
     e.target.className !== 'films__overlay' &&
     e.target.className !== 'films__trailer-text'
   ) {
-    console.log('Click Error!');
     return;
   } else {
     e.preventDefault;

@@ -1,7 +1,6 @@
 const throttle = require('lodash.throttle');
-let a =1;
+
 const hideScrollUpBtn = () => {
-  console.log(a +1)
     let scroll = window.pageYOffset;
   
     const scrollUpButton = document.querySelector('.scroll-up-btn');

@@ -1,7 +1,4 @@
 import { renderMoviesCards } from '../createMoviesMarkup/renderMoviesCards';  
-
-
-
 const refs = {
   filmCard: document.querySelector('.films__list'),
   backdrop: document.querySelector('.backdrop-modal-film'),
