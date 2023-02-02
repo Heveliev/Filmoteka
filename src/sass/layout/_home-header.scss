@@ -1,3 +1,11 @@
+  .js-failure-massege {
+    font-size: 14px;
+    line-height: 1.14;
+    color: #FF001B;
+    text-align: center;
+    margin-top: 20px;
+  }
+
 @media screen and (max-width: 677px) {
   .header {
     background-color: var(--footer-info);
@@ -87,6 +95,11 @@
     border: none;
     border-bottom: 0.5px solid var(--primary-background-color);
   }
+
+  .js-failure-massege {
+    text-align: left;
+  }
+
 }
 
 @media screen and (max-width: 767px) and (min-device-pixel-ratio: 2),

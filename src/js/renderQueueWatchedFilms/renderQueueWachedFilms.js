@@ -1,5 +1,5 @@
 import { renderMoviesCards } from '../createMoviesMarkup/renderMoviesCards';
-import { hidePageLoadSpinner,removeLocalData} from '../common/common';
+import { hidePageLoadSpinner, removeLocalData } from '../common/common';
 
 const watched = document.querySelector('.watched-films');
 const queue = document.querySelector('.queue-films');
