@@ -1,4 +1,7 @@
+const throttle = require('lodash.throttle');
+let a =1;
 const hideScrollUpBtn = () => {
+  console.log(a +1)
     let scroll = window.pageYOffset;
   
     const scrollUpButton = document.querySelector('.scroll-up-btn');
@@ -10,26 +13,5 @@ const hideScrollUpBtn = () => {
     scrollUpButton.blur();
     scrollUpButton.classList.add('scroll-up-btn--hidden');
   };
-
-window.addEventListener('scroll', hideScrollUpBtn);
-
-
-{/* <a href="#top" class="scroll-up-btn scroll-up-btn--hidden">
-<svg class="scroll-up-btn__icon" width="30" height="30">
-  <use href="./images/sprite.svg#arrow-up"></use>
-</svg>
-</a>
-
-
-import './js/hideScrollUpBtn'; */}
-
-
-{/* <a href="#top" class="scroll-up-btn scroll-up-btn--hidden">
-      <svg class="scroll-up-btn__icon" width="30" height="30">
-        <use href="./images/sprite.svg#arrow-up"></use>
-      </svg>
-    </a> */}
-
-    // import './js/hideScrollUpBtn';
-
-    // @import './components/scroll-button';
+  window.removeEventListener('scroll',throttle(hideScrollUpBtn,500));
+window.addEventListener('scroll',throttle(hideScrollUpBtn,500));
