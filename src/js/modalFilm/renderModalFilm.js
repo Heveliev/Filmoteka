@@ -1,25 +1,41 @@
+import { renderMoviesCards } from '../createMoviesMarkup/renderMoviesCards';  
+
+
+
 const refs = {
   filmCard: document.querySelector('.films__list'),
   backdrop: document.querySelector('.backdrop-modal-film'),
   filmRendering: document.querySelector('.film-render-markup'),
 };
 
+const librPage = document.querySelector("#js-libr");
+const queuePage = document.querySelector("#queue-films");
+const watchedPage = document.querySelector("#watched-films");
+refs.filmCard.removeEventListener('click', openModalFilm);
 refs.filmCard.addEventListener('click', openModalFilm);
 
 function openModalFilm(evt) {
+  if (evt.target.nodeName === 'IMG' && evt.target.classList.contains("films__picture")) {
   refs.backdrop.classList.remove('is-hidden');
   document.body.style.overflow = 'hidden';
 
   const filmId = evt.target.closest('li').id;
-  const filmArray = JSON.parse(localStorage.getItem('saved-movies'));
+  try {
+    const filmArray = JSON.parse(localStorage.getItem('saved-movies'));
   const filmOpened = filmArray.find(film => film.id === Number(filmId));
-
+  
   renderModalFilm(filmOpened);
   findGenres(filmOpened.genre_ids);
   localStorageHandler(filmOpened);
 
+  } catch (error) {
+    throw new Error(error)
+  }
+  document.removeEventListener('click', closeModalFilm);
+  window.removeEventListener('keydown', closeModalFilm);
   document.addEventListener('click', closeModalFilm);
   window.addEventListener('keydown', closeModalFilm);
+  }
 }
 
 function closeModalFilm(evt) {
@@ -33,8 +49,9 @@ function closeModalFilm(evt) {
     refs.backdrop.classList.add('is-hidden');
     document.body.style.overflow = 'auto';
     clearModalFilm();
+
   }
-}
+} 
 
 function renderModalFilm(film) {
   return (refs.filmRendering.innerHTML = `
@@ -91,8 +108,13 @@ function clearModalFilm() {
 }
 
 function findGenres(filmGenreIds) {
-  const savedGenres = JSON.parse(localStorage.getItem('saved-genres'));
+  try {
+    const savedGenres = JSON.parse(localStorage.getItem('saved-genres'));
   return filmGenreIds.map(genreId => savedGenres[genreId]).join(`, `);
+  } catch (error) {
+    throw new Error(error)
+  }
+  
 }
 
 function localStorageHandler(film) {
@@ -101,12 +123,14 @@ function localStorageHandler(film) {
 
   const WATCHED_KEY = 'watched-films';
   const QUEUE_KEY = 'queue-films';
-
+  toWatchedBtn.removeEventListener('click', addToWatched);
+  queueBtn.removeEventListener('click', addToQueue);
   toWatchedBtn.addEventListener('click', addToWatched);
   queueBtn.addEventListener('click', addToQueue);
 
   function addToWatched() {
-    let watchedData = JSON.parse(localStorage.getItem('watched-films')) || [];
+    try {
+      let watchedData = JSON.parse(localStorage.getItem('watched-films')) || [];
     if (!watchedData.find(item => item.id === film.id)) {
       watchedData.push(film);
     } else {
@@ -114,30 +138,57 @@ function localStorageHandler(film) {
     }
     localStorage.setItem(WATCHED_KEY, JSON.stringify(watchedData));
     toWatchedBtn.textContent = getWatchActionText(film);
+    if (librPage.classList.contains("current") && watchedPage.classList.contains("current-page")) {
+      renderMoviesCards(watchedData);
+    }
+    } catch (error) {
+      throw new Error(error)
+    }
+    
+
   }
 
   function addToQueue() {
-    let queueData = JSON.parse(localStorage.getItem('queue-films')) || [];
-    if (!queueData.find(item => item.id === film.id)) {
-      queueData.push(film);
-    } else {
-      queueData = queueData.filter(item => item.id !== film.id);
+    try {
+      let queueData = JSON.parse(localStorage.getItem('queue-films')) || [];
+      if (!queueData.find(item => item.id === film.id)) {
+        queueData.push(film);
+      } else {
+        queueData = queueData.filter(item => item.id !== film.id);
+      }
+      localStorage.setItem(QUEUE_KEY, JSON.stringify(queueData));
+      queueBtn.textContent = getQueueActiontext(film);
+          if (librPage.classList.contains("current") && queuePage.classList.contains("current-page")) {
+        renderMoviesCards(queueData);
+      }
+    } catch (error) {
+      throw new Error(error)
     }
-    localStorage.setItem(QUEUE_KEY, JSON.stringify(queueData));
-    queueBtn.textContent = getQueueActiontext(film);
+  
   }
 }
 
 function getWatchActionText(film) {
-  let watchedData = JSON.parse(localStorage.getItem('watched-films')) || [];
+  try {
+    let watchedData = JSON.parse(localStorage.getItem('watched-films')) || [];
   return watchedData.find(item => item.id === film.id)
     ? 'REMOVE FROM WATCHED'
     : 'ADD TO WATCHED';
+  } catch (error) {
+    throw new Error(error)
+  }
+  
 }
 
 function getQueueActiontext(film) {
-  let queueData = JSON.parse(localStorage.getItem('queue-films')) || [];
+  try { 
+    let queueData = JSON.parse(localStorage.getItem('queue-films')) || [];
   return queueData.find(item => item.id === film.id)
     ? 'REMOVE FROM QUEUE'
     : 'ADD TO QUEUE';
+    
+  } catch (error) {
+    throw new Error(error)
+  }
+ 
 }

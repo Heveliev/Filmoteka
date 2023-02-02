@@ -1,9 +1,16 @@
-import { fetchTrendingMoviesInfo } from '../GETAPI/fetchTrendingMoviesInfo';
+import { fetchTrendingMoviesInfo } from '../getapi/fetchTrendingMoviesInfo';
 import { renderMoviesCards } from '../createMoviesMarkup/renderMoviesCards';
-import { saveMoviesToLoсalStorage, scrollToTop } from '../common/common';
+import {
+  saveMoviesToLoсalStorage,
+  scrollToTop,
+  showLoadSpinner,
+  hideLoadSpinner,
+  setLocalData,
+} from '../common/common';
 
 const refs = {
   paginationBox: document.querySelector('.page-number__list'),
+  loaderEl: document.querySelector('.loader'),
 };
 
 let globalCurrentPage = 0;
@@ -57,11 +64,14 @@ export function renderPagination(currentPage, allPages) {
 
 export async function handlerTrendingPagination(evt) {
   function renderNewMoviesPage(pageNum) {
+    showLoadSpinner();
     fetchTrendingMoviesInfo(pageNum).then(data => {
       renderMoviesCards(data.results);
       scrollToTop();
       renderPagination(data.page, data.total_pages);
       saveMoviesToLoсalStorage(data.results);
+      setLocalData(data);
+      hideLoadSpinner();
     });
   }
 
