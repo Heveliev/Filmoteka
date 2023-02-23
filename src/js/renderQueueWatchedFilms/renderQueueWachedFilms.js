@@ -128,6 +128,25 @@ function createMovieDetalisMarkup(movie) {
 }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 function createDataToRender(data, pageNum = 1) {
   const dataLength = data.length;
   const resultsArr = [];
