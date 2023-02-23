@@ -1,0 +1,35 @@
+.scroll-up-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    width: 50px;
+    height: 50px;
+    bottom: 30px;
+    right: 30px;
+    background-color: black;
+    border-radius: 5;
+    opacity: 0.3;
+    color: black;
+    transition-property: all;
+    transition-duration: 350ms;
+    transition-timing-function: ease-in-out;
+    box-shadow: 1px 49px 41px -25px rgba(0, 0, 0, 0.51);
+    z-index: 11;
+  
+    &--hidden {
+      transform: translateY(+200%);
+    }
+  
+    &:hover,
+    &:focus {
+      opacity: 1;
+      background-color: var(--card-info);
+      scale: 1.1;
+    }
+  
+    &__icon {
+      fill: wheat;
+      rotate: 270deg;
+    }
+  }

@@ -12,3 +12,4 @@ async function getData (value = "", page = 1){
 };
 
 export {getData};
+
