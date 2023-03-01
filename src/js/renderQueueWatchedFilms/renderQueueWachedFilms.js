@@ -37,7 +37,7 @@ queue.classList.add('current-page');
 try {
   clearError();
   const resp = localStorage.getItem(key);
- parseResp = JSON.parse(resp);
+  parseResp = JSON.parse(resp);
 if (!parseResp.length) {
   clearList()
   clearPagination();
@@ -47,7 +47,6 @@ if (!parseResp.length) {
   try {
     const data = createDataToRender(parseResp);
     clearError();
-
     renderMoviesCards(data.results);
     renderLibraryPagination(data.page, data.totalPages);
 
@@ -153,6 +152,7 @@ function createDataToRender(data, pageNum = 1) {
       continue;
     }
     resultsArr.push(data[i]);
+
   }
 
   const objToRender = {

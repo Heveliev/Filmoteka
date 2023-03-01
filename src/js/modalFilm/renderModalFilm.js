@@ -4,12 +4,14 @@ const refs = {
   backdrop: document.querySelector('.backdrop-modal-film'),
   filmRendering: document.querySelector('.film-render-markup'),
 };
-
+const homePage = document.querySelector("#js-home");
 const librPage = document.querySelector("#js-libr");
 const queuePage = document.querySelector("#queue-films");
 const watchedPage = document.querySelector("#watched-films");
 refs.filmCard.removeEventListener('click', openModalFilm);
 refs.filmCard.addEventListener('click', openModalFilm);
+let filmOpened;
+
 
 function openModalFilm(evt) {
   if (evt.target.nodeName === 'IMG' && evt.target.classList.contains("films__picture")) {
@@ -17,9 +19,18 @@ function openModalFilm(evt) {
   document.body.style.overflow = 'hidden';
 
   const filmId = evt.target.closest('li').id;
-  try {
-    const filmArray = JSON.parse(localStorage.getItem('saved-movies'));
-  const filmOpened = filmArray.find(film => film.id === Number(filmId));
+    try {
+    if (homePage.classList.contains("current")) {
+          const filmArray = JSON.parse(localStorage.getItem('saved-movies'));
+     filmOpened = filmArray.find(film => film.id === Number(filmId));
+    } else if (librPage.classList.contains("current") && queuePage.classList.contains("current-page")) {
+      const queueFilms = JSON.parse(localStorage.getItem('queue-films'))
+      filmOpened = queueFilms.find(film => film.id === Number(filmId));
+      } else if (librPage.classList.contains("current") && watchedPage.classList.contains("current-page")) {
+      const watchedFilms = JSON.parse(localStorage.getItem('watched-films'));
+      filmOpened = watchedFilms.find(film => film.id === Number(filmId))
+      }
+
   
   renderModalFilm(filmOpened);
   findGenres(filmOpened.genre_ids);
