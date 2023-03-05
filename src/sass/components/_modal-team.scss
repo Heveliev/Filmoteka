@@ -1,0 +1,99 @@
+.overlay {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 200;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.5s ;
+}
+
+.overlay.is-hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.modal {
+    max-width: 1000px;
+    width: 90vw;
+    height:90vh;
+    background: white;
+    border-radius: 4px;
+    padding: 20px;
+    padding-top: 40px;
+    overflow-y: auto;
+    position: relative;
+}
+
+.close-button {
+    border: 1px solid gray;
+    width: 30px;
+    height: 30px;
+    background: #ccc;
+    color: white;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.modal-body {
+    overflow-y: auto;
+    height: calc(90vh - 60px);
+}
+
+.card {
+    border: 1px solid gray;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.card-img {
+    max-width: 100%;
+    display: block;
+    height: auto;
+}
+
+.card-body {
+    padding: 30px 10px;
+    text-align: center;
+}
+
+.card-img-box {
+    position: relative;
+}
+
+.social-list {
+    display: flex;
+    justify-content: space-around;
+}
+
+.card-title {
+    margin-bottom: 20px;
+}
+
+.modal-body-content {
+    display: grid;
+    gap: 10px;
+    grid-template-columns: repeat(1, 1fr);
+     @media screen and(min-width: 400px) {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    @media screen and(min-width: 776px) {
+        grid-template-columns: repeat(5, 1fr);
+    }
+}
+
+.no-scroll {
+    overflow: hidden;
+}
+
