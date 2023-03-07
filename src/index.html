@@ -5,9 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Filmoteka</title>
     <link rel="icon" type="image/x-icon" href="./images/favicon.ico" />
-    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet"/>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="
+https://cdn.jsdelivr.net/npm/basiclightbox@5.0.4/dist/basicLightbox.min.css
+"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="./sass/index.scss" />
   </head>
   <body>
@@ -15,16 +24,16 @@
     <main>
       <include src="./partials/home-film-gallery.html"></include>
       <include src="./partials/page-number.html"></include>
+      <include src="./partials/button-scroll-up.html"></include>
     </main>
     <include src="./partials/footer.html"></include>
 
     <include src="./partials/modal-film.html"></include>
     <include src="./partials/modal-team.html"></include>
+    
     <include src="./partials/modalTeam.html"></include>
     <script src="./js/modalTeam/modalTeam.js"></script>
-    <!-- <script type="module" src="./js/firebase/firebase.js"></script> -->
-    <script type="module" src="./js/renderTrendigMovies/renderTrendingPage.js"></script>
-    <script type="module" src="./js/modalFilm/renderModalFilm.js"></script>
+
     <script type="module" src="./index.js"></script>
     
   </body>

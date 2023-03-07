@@ -1,3 +1,4 @@
+
 import { fetchMoviesGenres } from './fetchTrendingMoviesInfo';
 
 export async function setMoviesGenres() {

@@ -1,51 +1,128 @@
+import { renderMoviesCards } from '../createMoviesMarkup/renderMoviesCards';
 
-
+import { hidePageLoadSpinner, removeLocalData } from '../common/common';
+import {
+  hidePageLoadSpinner,
+  removeLocalData,
+  showLoadSpinner,
+  hideLoadSpinner,
+  scrollToTop,
+} from '../common/common';
+let globalCurrentPage = 0;
+let parseResp;
 const watched = document.querySelector('.watched-films');
 const queue = document.querySelector('.queue-films');
 const btnList = document.querySelector('.button-list');
-const librList = document.querySelector('.films__list-libr')
+const librNoFilm = document.querySelector('.js-no_films__list');
+const librList = document.querySelector('.films__list');
+const logo = document.querySelector('.logo-link');
+const paginationBox = document.querySelector('.page-number__list');
 
+const WATCHED_KEY = 'watched-films';
+const QUEUE_KEY = 'queue-films';
+
+if (localStorage.getItem(WATCHED_KEY) === null) {
+  localStorage.setItem(WATCHED_KEY, JSON.stringify([]));
+  hidePageLoadSpinner();
+}
+
+if (localStorage.getItem(QUEUE_KEY) === null) {
+  localStorage.setItem(QUEUE_KEY, JSON.stringify([]));
+  hidePageLoadSpinner();
+}
 
 let key = 'queue-films';
+
 queue.classList.add('current-page');
-const resp = localStorage.getItem(key);
-const parseResp = JSON.parse(resp);
-
-if(!parseResp.length){
-  fooError(key);
-  
-} else{try {
-  renderMoviesCardsLibr(parseResp);
-} catch (error) {
-  fooError(key);
-}}
-
-
-btnList.addEventListener('click', onBtnClick);
-
-function onBtnClick(e) {
-  e.preventDefault();
-  key = e.target.id;
-  console.dir(key);
-  selectCurrentPage(key);
+try {
+  clearError();
   const resp = localStorage.getItem(key);
-  const parseResp = JSON.parse(resp);
-if(!parseResp.length){
+  parseResp = JSON.parse(resp);
+if (!parseResp.length) {
+  clearList()
+  clearPagination();
   fooError(key);
-} else{
+  hidePageLoadSpinner();
+} else {
   try {
-    renderMoviesCardsLibr(parseResp)
+    const data = createDataToRender(parseResp);
+    clearError();
+    renderMoviesCards(data.results);
+    renderLibraryPagination(data.page, data.totalPages);
+
+    paginationBox.removeEventListener('click', handlerLibraryPagination);
+    paginationBox.addEventListener('click', handlerLibraryPagination);
+
+    hidePageLoadSpinner();
+
+
+
   } catch (error) {
+    clearList()
+    clearPagination();
     fooError(key);
+    hidePageLoadSpinner();
   }
 }
-
+} catch (error) {
+  throw new Error(error);
 }
 
+logo.removeEventListener('click', removeLocalData);
+logo.addEventListener('click', removeLocalData);
+
+
+btnList.removeEventListener('click', onBtnClick);
+btnList.addEventListener('click', onBtnClick);
+
+export function onBtnClick(e) {
+  e.preventDefault();
+  key = e.target.id;
+  selectCurrentPage(key);
+  try {
+    const resp = localStorage.getItem(key);
+  parseResp = JSON.parse(resp);
+
+  if (!parseResp.length) {
+    clearList()
+    clearPagination();
+    fooError(key);
+  } else {
+    try {
+      clearError();
+      const data = createDataToRender(parseResp);
+      renderMoviesCards(data.results);
+      renderLibraryPagination(data.page, data.totalPages);
+
+      paginationBox.removeEventListener('click', handlerLibraryPagination);
+      paginationBox.addEventListener('click', handlerLibraryPagination);
+
+      hidePageLoadSpinner();
+    } catch (error) {
+      clearList()
+      clearPagination();
+      fooError(key);
+      hidePageLoadSpinner();
+    }
+  }
+  } catch (error) {
+    throw new Error(error)
+  }
+  
+}
+function clearPagination(){
+  paginationBox.innerHTML = '';
+}
+function clearError() {
+  librNoFilm.innerHTML = '';
+}
+function clearList() {
+  librList.innerHTML = '';
+}
 function fooError(key) {
-  return (librList.innerHTML = `
+  return (librNoFilm.innerHTML = `
   <img src="https://kartinkof.club/uploads/posts/2022-03/1648361803_4-kartinkof-club-p-mem-obezyana-smotrit-v-storonu-5.jpg" alt="monkey" width="400" height="200">
-  <p>Opss... you haven't added any movies to ${key}</p>
+  <p class="js-no_films__text">Opss... you haven't added any movies to (${key})</p>
 `);
 }
 
@@ -66,68 +143,6 @@ function selectCurrentPage(id) {
 }
 
 
-function renderMoviesCardsLibr(moviesObjects) {
-  return (librList.innerHTML = moviesObjects
-    .map(
-      movie => `<li class="films__card" id=${movie.id}> <div class="films__link">
-        <div class="films__overflow-wrapper"><img src="https://image.tmdb.org/t/p/w500/${movie.poster_path}"  alt="film poster" class="films__picture" />
-        <div class="films__overlay">
-        <p class="films__trailer-text">Watch trailer</p>
-        <img src="" alt="" class="films__trailer-icon">
-      </div>
-        </div>
-          <p class="films__title">${movie.title}</p>
-          <div class="films__details">
-            <p class="films__genres film-font-style">${createMovieDetalisMarkup(
-              movie
-            )}</p>
-            <span class="films__rate">${movie.vote_average.toFixed(1)}</span>
-          </div>
-        </div>
-      </li>`
-    )
-    .join(''));
-}
-
-
-
-function createMovieDetalisMarkup(movie) {
-  // console.log(movie.id);
-
-  const savedGenres = localStorage.getItem('saved-genres');
-  const genres = JSON.parse(savedGenres);
-
-  let movieGenres = [];
-  const movieReleaseYear = movie.release_date.slice(0, 4);
-
-  for (let i = 0; i < movie.genre_ids.length; i++) {
-    movieGenres.push(genres[movie.genre_ids[i]]);
-  }
-
-  let moviesGenresMarkup = '';
-
-  if (movieGenres.length > 2) {
-    moviesGenresMarkup = movieGenres.splice(0, 2).join(', ') + ', Other';
-  } else {
-    moviesGenresMarkup = movieGenres.join(', ');
-  }
-
-  if (movie.genre_ids.length === 0 && !movie.release_date) {
-    return '';
-  }
-
-  if (movie.genre_ids.length === 0 && movie.release_date) {
-    return movieReleaseYear;
-  }
-
-  if (movie.genre_ids.length !== 0 && !movie.release_date) {
-    return moviesGenresMarkup;
-  }
-
-  return moviesGenresMarkup + ' | ' + movieReleaseYear;
-}
-
-
 function createDataToRender(data, pageNum = 1) {
   const dataLength = data.length;
   const resultsArr = [];
@@ -137,6 +152,7 @@ function createDataToRender(data, pageNum = 1) {
       continue;
     }
     resultsArr.push(data[i]);
+
   }
 
   const objToRender = {
@@ -221,3 +237,4 @@ function renderLibraryPagination(currentPage, allPages) {
 
   paginationBox.innerHTML = markup;
 }
+
