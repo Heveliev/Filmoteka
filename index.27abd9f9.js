@@ -1,2 +1,0 @@
-var closeBtnRef=document.querySelector(".close-button"),overlayRef=document.querySelector(".overlay"),footerTextRef=document.querySelector("a.footer-text");function closeModal(){overlayRef.classList.add("is-hidden"),document.body.classList.remove("no-scroll")}function openModal(e){e.preventDefault(),overlayRef.classList.remove("is-hidden"),document.body.classList.add("no-scroll")}closeBtnRef.addEventListener("click",closeModal),footerTextRef.addEventListener("click",openModal),console.log(footerTextRef);
-//# sourceMappingURL=index.27abd9f9.js.map
