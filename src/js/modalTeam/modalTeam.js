@@ -11,7 +11,6 @@ function closeModal() {
 };
 
 footerTextRef.addEventListener('click', openModal);
-console.log(footerTextRef);
 
 function openModal(e) {
     e.preventDefault();

@@ -55,12 +55,15 @@
     border: 1px solid gray;
     border-radius: 4px;
     overflow: hidden;
+
 }
 
 .card-img {
     max-width: 100%;
     display: block;
-    height: auto;
+    // height: auto;
+    height: 250px;
+        object-fit: cover;
 }
 
 .card-body {
@@ -70,6 +73,7 @@
 
 .card-img-box {
     position: relative;
+    max-height: 250px;
 }
 
 .social-list {
