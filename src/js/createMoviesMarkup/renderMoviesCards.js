@@ -29,7 +29,7 @@ export function renderMoviesCards(moviesObjects) {
 
 export function createMovieDetalisMarkup(movie) {
   try {
-    const savedGenres = localStorage.getItem('saved-genres');
+    const savedGenres = localStorage.getItem('saved-genres') || [];
   const genres = JSON.parse(savedGenres);
 
   let movieGenres = [];
