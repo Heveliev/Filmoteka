@@ -29,8 +29,7 @@ export function renderMoviesCards(moviesObjects) {
 
 export function createMovieDetalisMarkup(movie) {
   try {
-    const savedGenres = localStorage.getItem('saved-genres') || [];
-  const genres = JSON.parse(savedGenres);
+  const genres = JSON.parse(localStorage.getItem('saved-genres')) || [];
 
   let movieGenres = [];
   const movieReleaseYear = movie.release_date.slice(0, 4);
